@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: Info21
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  sql:
+    init:
+      schema-locations: classpath:schema.sql, classpath:tables.sql
+      mode: always
+
+  jpa:
+    hibernate:
+      ddl-auto: none # опираемся на работу хибернейта
+    properties:
+      hibernate.default_schema: app # Указываем схему по умолчанию
+    show-sql: false
+
+  # ликвибейс пока отключен
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: false
+    default-schema: app
+    liquibase-schema: liquibase
+
+logging:
+  level:
+    root: info
+    com.zaxxer.hikari: off
