@@ -5,27 +5,27 @@ databaseChangeLog:
       schemaName: app
       changes:
         - sqlFile:
-            path: src/main/resources/import_data/part1.sql
+            path: import_data/part1.sql
             encoding: UTF-8
             splitStatements: false
             endDelimiter: ";"
   - include:
-      file: src/main/resources/import_data/tasks.yaml
+      file: import_data/tasks.yaml
   - include:
-      file: src/main/resources/import_data/peers.yaml
+      file: import_data/peers.yaml
   - include:
-      file: src/main/resources/import_data/checks.yaml
+      file: import_data/checks.yaml
   - include:
-      file: src/main/resources/import_data/p2p.yaml
+      file: import_data/p2p.yaml
   - include:
-      file: src/main/resources/import_data/verter.yaml
+      file: import_data/verter.yaml
   - include:
-      file: src/main/resources/import_data/transferred_points.yaml
+      file: import_data/transferred_points.yaml
   - include:
-      file: src/main/resources/import_data/friends.yaml
+      file: import_data/friends.yaml
   - include:
-      file: src/main/resources/import_data/recommendations.yaml
+      file: import_data/recommendations.yaml
   - include:
-      file: src/main/resources/import_data/time_tracking.yaml
+      file: import_data/time_tracking.yaml
   - include:
-      file: src/main/resources/import_data/xp.yaml
+      file: import_data/xp.yaml

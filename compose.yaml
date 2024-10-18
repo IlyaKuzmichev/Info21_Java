@@ -1,9 +1,37 @@
+version: '3.8'
+
 services:
   postgres:
     image: 'postgres:latest'
     environment:
-      - 'POSTGRES_DB=postgres'
-      - 'POSTGRES_PASSWORD=postgres'
-      - 'POSTGRES_USER=postgres'
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./src/main/resources/schema.sql:/docker-entrypoint-initdb.d/init-script.sql
     ports:
-      - '5432'
+      - "5432:5432"
+
+  liquibase:
+    image: liquibase/liquibase
+    depends_on:
+      - postgres
+    environment:
+      LIQUIBASE_COMMAND_USERNAME: ${POSTGRES_USER}
+      LIQUIBASE_COMMAND_PASSWORD: ${POSTGRES_PASSWORD}
+      LIQUIBASE_COMMAND_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      LIQUIBASE_COMMAND_DRIVER: org.postgresql.Driver
+      LIQUIBASE_SEARCH_PATH: /liquibase/changelog
+      #LIQUIBASE_COMMAND_INIT_PROJECT_CHANGELOG_FILE: /liquibase/changelog/db.changelog-master.yaml
+      LIQUIBASE_LIQUIBASE_SCHEMA_NAME: liquibase
+      LIQUIBASE_COMMAND_DEFAULT_SCHEMA_NAME: app
+      LIQUIBASE_COMMAND_CHANGELOG_FILE: db.changelog-master.yaml
+    volumes:
+      - ./src/main/resources/db.changelog-master.yaml:/liquibase/db.changelog-master.yaml
+      - ./src/main/resources:/liquibase/changelog
+    command:
+      - update
+      - --log-level=debug
+volumes:
+  postgres_data:

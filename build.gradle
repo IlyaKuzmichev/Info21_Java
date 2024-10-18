@@ -26,6 +26,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -60,6 +61,7 @@ liquibase {
             defaultSchemaName 'app' // Замените на вашу рабочую схему
         }
     }
+    runList = 'main'
 }
 
 tasks.named('test') {
