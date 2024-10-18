@@ -23,15 +23,12 @@ services:
       LIQUIBASE_COMMAND_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
       LIQUIBASE_COMMAND_DRIVER: org.postgresql.Driver
       LIQUIBASE_SEARCH_PATH: /liquibase/changelog
-      #LIQUIBASE_COMMAND_INIT_PROJECT_CHANGELOG_FILE: /liquibase/changelog/db.changelog-master.yaml
       LIQUIBASE_LIQUIBASE_SCHEMA_NAME: liquibase
       LIQUIBASE_COMMAND_DEFAULT_SCHEMA_NAME: app
       LIQUIBASE_COMMAND_CHANGELOG_FILE: db.changelog-master.yaml
     volumes:
-      - ./src/main/resources/db.changelog-master.yaml:/liquibase/db.changelog-master.yaml
       - ./src/main/resources:/liquibase/changelog
     command:
       - update
-      - --log-level=debug
 volumes:
   postgres_data:
