@@ -9,7 +9,7 @@ spring:
 
   sql:
     init:
-      schema-locations: classpath:schema.sql, classpath:tables.sql
+      schema-locations: classpath:schema.sql
       mode: always
 
   jpa:
@@ -17,12 +17,12 @@ spring:
       ddl-auto: none # опираемся на работу хибернейта
     properties:
       hibernate.default_schema: app # Указываем схему по умолчанию
-    show-sql: false
+    show-sql: true
 
   # ликвибейс пока отключен
   liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.yaml
-    enabled: false
+    change-log: classpath:db.changelog-master.yaml
+    enabled: true
     default-schema: app
     liquibase-schema: liquibase
 

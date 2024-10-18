@@ -1,0 +1,78 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: user
+      schemaName: app
+      changes:
+        - insert:
+            tableName: verter
+            columns:
+              - column:
+                  name: check
+                  value: 3
+              - column:
+                  name: state
+                  value: "Start"
+              - column:
+                  name: time
+                  value: "18:36"
+        - insert:
+            tableName: verter
+            columns:
+              - column:
+                  name: check
+                  value: 3
+              - column:
+                  name: state
+                  value: "Failure"
+              - column:
+                  name: time
+                  value: "18:37"
+        - insert:
+            tableName: verter
+            columns:
+              - column:
+                  name: check
+                  value: 7
+              - column:
+                  name: state
+                  value: "Start"
+              - column:
+                  name: time
+                  value: "10:15"
+        - insert:
+            tableName: verter
+            columns:
+              - column:
+                  name: check
+                  value: 7
+              - column:
+                  name: state
+                  value: "Success"
+              - column:
+                  name: time
+                  value: "10:16"
+        - insert:
+            tableName: verter
+            columns:
+              - column:
+                  name: check
+                  value: 8
+              - column:
+                  name: state
+                  value: "Start"
+              - column:
+                  name: time
+                  value: "10:41"
+        - insert:
+            tableName: verter
+            columns:
+              - column:
+                  name: check
+                  value: 8
+              - column:
+                  name: state
+                  value: "Success"
+              - column:
+                  name: time
+                  value: "10:41"

@@ -1,0 +1,102 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: user
+      schemaName: app
+      changes:
+        - insert:
+            tableName: checks
+            columns:
+              - column:
+                  name: peer
+                  value: "Aboba"
+              - column:
+                  name: task
+                  value: "C3_SimpleBashUtils"
+              - column:
+                  name: date
+                  value: "2023-09-24"
+        - insert:
+            tableName: checks
+            columns:
+              - column:
+                  name: peer
+                  value: "Aboba"
+              - column:
+                  name: task
+                  value: "C2_s21_stringplus"
+              - column:
+                  name: date
+                  value: "2023-09-26"
+        - insert:
+            tableName: checks
+            columns:
+              - column:
+                  name: peer
+                  value: "Baboba"
+              - column:
+                  name: task
+                  value: "DO1_Linux"
+              - column:
+                  name: date
+                  value: "2023-09-25"
+        - insert:
+            tableName: checks
+            columns:
+              - column:
+                  name: peer
+                  value: "Derevo"
+              - column:
+                  name: task
+                  value: "SQL2_Info21_v1.0"
+              - column:
+                  name: date
+                  value: "2023-09-26"
+        - insert:
+            tableName: checks
+            columns:
+              - column:
+                  name: peer
+                  value: "Egogo"
+              - column:
+                  name: task
+                  value: "CPP1_s21_matrixplus"
+              - column:
+                  name: date
+                  value: "2023-09-27"
+        - insert:
+            tableName: checks
+            columns:
+              - column:
+                  name: peer
+                  value: "Cagoga"
+              - column:
+                  name: task
+                  value: "A1_Maze"
+              - column:
+                  name: date
+                  value: "2023-09-26"
+        - insert:
+            tableName: checks
+            columns:
+              - column:
+                  name: peer
+                  value: "Baboba"
+              - column:
+                  name: task
+                  value: "DO1_Linux"
+              - column:
+                  name: date
+                  value: "2023-09-30"
+        - insert:
+            tableName: checks
+            columns:
+              - column:
+                  name: peer
+                  value: "Aboba"
+              - column:
+                  name: task
+                  value: "DO1_Linux"
+              - column:
+                  name: date
+                  value: "2023-09-30"

@@ -1,0 +1,78 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: user
+      schemaName: app
+      changes:
+        - insert:
+            tableName: transferred_points
+            columns:
+              - column:
+                  name: checking_peer
+                  value: "Baboba"
+              - column:
+                  name: checked_peer
+                  value: "Aboba"
+              - column:
+                  name: points_amount
+                  value: 1
+        - insert:
+            tableName: transferred_points
+            columns:
+              - column:
+                  name: checking_peer
+                  value: "Cagoga"
+              - column:
+                  name: checked_peer
+                  value: "Baboba"
+              - column:
+                  name: points_amount
+                  value: 1
+        - insert:
+            tableName: transferred_points
+            columns:
+              - column:
+                  name: checking_peer
+                  value: "Cagoga"
+              - column:
+                  name: checked_peer
+                  value: "Aboba"
+              - column:
+                  name: points_amount
+                  value: 1
+        - insert:
+            tableName: transferred_points
+            columns:
+              - column:
+                  name: checking_peer
+                  value: "Egogo"
+              - column:
+                  name: checked_peer
+                  value: "Derevo"
+              - column:
+                  name: points_amount
+                  value: 1
+        - insert:
+            tableName: transferred_points
+            columns:
+              - column:
+                  name: checking_peer
+                  value: "Derevo"
+              - column:
+                  name: checked_peer
+                  value: "Cagoga"
+              - column:
+                  name: points_amount
+                  value: 1
+        - insert:
+            tableName: transferred_points
+            columns:
+              - column:
+                  name: checking_peer
+                  value: "Derevo"
+              - column:
+                  name: checked_peer
+                  value: "Egogo"
+              - column:
+                  name: points_amount
+                  value: 1
