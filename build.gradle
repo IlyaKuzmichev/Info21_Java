@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.4'
     id 'io.spring.dependency-management' version '1.1.6'
+    id 'org.liquibase.gradle' version '2.2.0'
 }
 
 group = 'edu.school21'
@@ -24,13 +25,15 @@ repositories {
 }
 
 dependencies {
-//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 //    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.postgresql:postgresql:42.7.2'
 //    runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -39,6 +42,26 @@ dependencies {
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:postgresql'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // https://mvnrepository.com/artifact/org.liquibase/liquibase-core
+    liquibaseRuntime group: 'org.liquibase', name: 'liquibase-core', version: '4.8.0'
+    liquibaseRuntime group: 'info.picocli', name: 'picocli', version: '4.6.3'
+    liquibaseRuntime group: 'org.postgresql', name: 'postgresql', version: '42.7.2'
+    liquibaseRuntime group: 'org.yaml', name: 'snakeyaml', version: '1.33'
+}
+apply plugin: "org.liquibase.gradle"
+
+liquibase {
+    activities {
+        main {
+            changelogFile 'src/main/resources/db.changelog-master.yaml'
+            url 'jdbc:postgresql://localhost:5432/postgres'
+            username 'postgres'
+            password 'postgres'
+            liquibaseSchemaName 'liquibase'
+            defaultSchemaName 'app' // Замените на вашу рабочую схему
+        }
+    }
+    runList = 'main'
 }
 
 tasks.named('test') {

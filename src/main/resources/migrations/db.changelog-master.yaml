@@ -1,0 +1,111 @@
+databaseChangeLog:
+  - changeSet: # создание таблиц и триггеров
+      id: 1
+      author: user
+      schemaName: app
+      changes:
+        - sqlFile:
+            path: import_data/1_tables.sql
+            encoding: UTF-8
+            splitStatements: false
+            endDelimiter: ";"
+  - changeSet: # добавление данных
+      id: 2
+      author: user
+      schemaName: app
+      changes:
+        - sqlFile:
+            path: import_data/2_tasks.sql
+            encoding: UTF-8
+            splitStatements: false
+            endDelimiter: ";"
+  - changeSet: # добавление данных
+      id: 3
+      author: user
+      schemaName: app
+      changes:
+        - sqlFile:
+            path: import_data/3_peers.sql
+            encoding: UTF-8
+            splitStatements: false
+            endDelimiter: ";"
+  - changeSet: # добавление данных
+      id: 4
+      author: user
+      schemaName: app
+      changes:
+        - sqlFile:
+            path: import_data/4_checks.sql
+            encoding: UTF-8
+            splitStatements: false
+            endDelimiter: ";"
+  - changeSet: # добавление данных
+      id: 5
+      author: user
+      schemaName: app
+      changes:
+        - sqlFile:
+            path: import_data/5_p2p.sql
+            encoding: UTF-8
+            splitStatements: false
+            endDelimiter: ";"
+  - changeSet: # добавление данных
+      id: 6
+      author: user
+      schemaName: app
+      changes:
+        - sqlFile:
+            path: import_data/6_verter.sql
+            encoding: UTF-8
+            splitStatements: false
+            endDelimiter: ";"
+  - changeSet: # добавление данных
+      id: 7
+      author: user
+      schemaName: app
+      changes:
+        - sqlFile:
+            path: import_data/7_transferred_points.sql
+            encoding: UTF-8
+            splitStatements: false
+            endDelimiter: ";"
+  - changeSet: # добавление данных
+      id: 8
+      author: user
+      schemaName: app
+      changes:
+        - sqlFile:
+            path: import_data/8_friends.sql
+            encoding: UTF-8
+            splitStatements: false
+            endDelimiter: ";"
+  - changeSet: # добавление данных
+      id: 9
+      author: user
+      schemaName: app
+      changes:
+        - sqlFile:
+            path: import_data/9_recommendations.sql
+            encoding: UTF-8
+            splitStatements: false
+            endDelimiter: ";"
+  - changeSet: # добавление данных
+      id: 10
+      author: user
+      schemaName: app
+      changes:
+        - sqlFile:
+            path: import_data/10_time_tracking.sql
+            encoding: UTF-8
+            splitStatements: false
+            endDelimiter: ";"
+  - changeSet: # добавление данных
+      id: 11
+      author: user
+      schemaName: app
+      changes:
+        - sqlFile:
+            path: import_data/11_xp.sql
+            encoding: UTF-8
+            splitStatements: false
+            endDelimiter: ";"
