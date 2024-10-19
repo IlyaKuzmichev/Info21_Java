@@ -27,7 +27,7 @@ services:
       LIQUIBASE_COMMAND_DEFAULT_SCHEMA_NAME: app
       LIQUIBASE_COMMAND_CHANGELOG_FILE: db.changelog-master.yaml
     volumes:
-      - ./src/main/resources:/liquibase/changelog
+      - ./src/main/resources/migrations:/liquibase/changelog
     command:
       - update
 volumes:

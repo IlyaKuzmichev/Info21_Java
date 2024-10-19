@@ -1,3 +1,6 @@
+server:
+  port: 8081
+
 spring:
   application:
     name: Info21
@@ -21,7 +24,7 @@ spring:
 
   # ликвибейс пока отключен
   liquibase:
-    change-log: classpath:db.changelog-master.yaml
+    change-log: classpath:migrations/db.changelog-master.yaml
     enabled: true
     default-schema: app
     liquibase-schema: liquibase
