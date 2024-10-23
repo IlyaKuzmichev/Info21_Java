@@ -1,6 +1,17 @@
 version: '3.8'
 
 services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: authdb
+    volumes:
+      - mongo_data:/data/db
+
   postgres:
     image: 'postgres:latest'
     environment:
@@ -30,5 +41,7 @@ services:
       - ./core/src/main/resources/migrations:/liquibase/changelog
     command:
       - update
+
 volumes:
   postgres_data:
+  mongo_data:
