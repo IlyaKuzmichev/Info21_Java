@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Peers List</title>
+</head>
+<body>
+<h1>List of Peers</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Nickname</th>
+        <th>Birthday</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="peer : ${peers}">
+        <td><a th:href="@{/peers/{nickname}(nickname=${peer.nickname})}" th:text="${peer.nickname}"></a></td>
+        <td th:text="${peer.birthday}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
