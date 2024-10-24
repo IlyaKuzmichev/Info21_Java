@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Peer Details</title>
+</head>
+<body>
+<h1>Details for: <span th:text="${peer.nickname}"></span></h1>
+
+<p>Birthday: <span th:text="${peer.birthday}"></span></p>
+
+<a href="/peers">Back to list</a>
+</body>
+</html>
