@@ -6,7 +6,13 @@
 <body>
 <h1>List of Peers</h1>
 
-<table border="1">
+<!-- Проверяем, если список пустой, выводим сообщение -->
+<div th:if="${#lists.isEmpty(peers)}">
+    <p>No peers available.</p>
+</div>
+
+<!-- Если список не пустой, отображаем таблицу -->
+<table border="1" th:if="${!#lists.isEmpty(peers)}">
     <thead>
     <tr>
         <th>Nickname</th>

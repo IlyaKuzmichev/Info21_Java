@@ -1,5 +1,6 @@
 package edu.school21.info21.controller;
 
+import edu.school21.info21.dto.PeersDTO;
 import edu.school21.info21.model.Peers;
 import edu.school21.info21.services.PeersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class PeersController {
     // Главная страница
     @GetMapping
     public String peers(Model model) {
-        List<Peers> peersList = peersService.getAllPeers();
+        List<PeersDTO> peersList = peersService.getAllPeers();
         model.addAttribute("peers", peersList);
         return "peers"; // Возвращаем имя шаблона "index.html"
     }
@@ -55,9 +56,11 @@ public class PeersController {
     }
 
     @PutMapping("/{nickname}")
-    public Peers updatePeer(@PathVariable String nickname, @RequestParam String birthday) {
+    public String updatePeer(@PathVariable String nickname, @RequestParam String birthday, Model model) {
         LocalDate newBirthday = LocalDate.parse(birthday);
-        return peersService.updatePeer(nickname, newBirthday);
+        Peers updatedPeer = peersService.updatePeer(nickname, newBirthday);
+        model.addAttribute("peer", updatedPeer);
+        return "peer";
     }
 
     @DeleteMapping("/{nickname}")

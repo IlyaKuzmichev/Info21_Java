@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Error</title>
 </head>
 <body>
-    <h1><span th:text="${error}"></span></h1>
+<h1><span th:text="${error}"></span></h1>
+
+<!-- Ссылка для возвращения на предыдущую страницу или главную -->
+<a th:href="@{${redirectUrl}}">Go back to the previous page</a>
 </body>
 </html>
