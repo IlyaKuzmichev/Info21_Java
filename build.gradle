@@ -46,14 +46,14 @@ dependencies {
     liquibaseRuntime group: 'org.liquibase', name: 'liquibase-core', version: '4.8.0'
     liquibaseRuntime group: 'info.picocli', name: 'picocli', version: '4.6.3'
     liquibaseRuntime group: 'org.postgresql', name: 'postgresql', version: '42.7.2'
-    liquibaseRuntime group: 'org.yaml', name: 'snakeyaml', version: '1.33'
+    liquibaseRuntime group: 'org.yaml', name: 'snakeyaml', version: '2.0'
 }
 apply plugin: "org.liquibase.gradle"
 
 liquibase {
     activities {
-        main {
-            changelogFile 'src/main/resources/db.changelog-master.yaml'
+        mainActivity {
+            changelogFile 'src/main/resources/migrations/db.changelog-master.yaml'
             url 'jdbc:postgresql://localhost:5432/postgres'
             username 'postgres'
             password 'postgres'
@@ -61,7 +61,7 @@ liquibase {
             defaultSchemaName 'app' // Замените на вашу рабочую схему
         }
     }
-    runList = 'main'
+    runList = ['mainActivity']
 }
 
 tasks.named('test') {

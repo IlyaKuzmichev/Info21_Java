@@ -5,7 +5,7 @@ databaseChangeLog:
       schemaName: app
       changes:
         - sqlFile:
-            path: import_data/1_tables.sql
+            path: src/main/resources/migrations/import_data/1_tables.sql
             encoding: UTF-8
             splitStatements: false
             endDelimiter: ";"
@@ -15,7 +15,7 @@ databaseChangeLog:
       schemaName: app
       changes:
         - sqlFile:
-            path: import_data/2_tasks.sql
+            path: src/main/resources/migrations/import_data/2_tasks.sql
             encoding: UTF-8
             splitStatements: false
             endDelimiter: ";"
@@ -25,7 +25,7 @@ databaseChangeLog:
       schemaName: app
       changes:
         - sqlFile:
-            path: import_data/3_peers.sql
+            path: src/main/resources/migrations/import_data/3_peers.sql
             encoding: UTF-8
             splitStatements: false
             endDelimiter: ";"
@@ -35,7 +35,7 @@ databaseChangeLog:
       schemaName: app
       changes:
         - sqlFile:
-            path: import_data/4_checks.sql
+            path: src/main/resources/migrations/import_data/4_checks.sql
             encoding: UTF-8
             splitStatements: false
             endDelimiter: ";"
@@ -45,7 +45,7 @@ databaseChangeLog:
       schemaName: app
       changes:
         - sqlFile:
-            path: import_data/5_p2p.sql
+            path: src/main/resources/migrations/import_data/5_p2p.sql
             encoding: UTF-8
             splitStatements: false
             endDelimiter: ";"
@@ -55,7 +55,7 @@ databaseChangeLog:
       schemaName: app
       changes:
         - sqlFile:
-            path: import_data/6_verter.sql
+            path: src/main/resources/migrations/import_data/6_verter.sql
             encoding: UTF-8
             splitStatements: false
             endDelimiter: ";"
@@ -65,7 +65,7 @@ databaseChangeLog:
       schemaName: app
       changes:
         - sqlFile:
-            path: import_data/7_transferred_points.sql
+            path: src/main/resources/migrations/import_data/7_transferred_points.sql
             encoding: UTF-8
             splitStatements: false
             endDelimiter: ";"
@@ -75,7 +75,7 @@ databaseChangeLog:
       schemaName: app
       changes:
         - sqlFile:
-            path: import_data/8_friends.sql
+            path: src/main/resources/migrations/import_data/8_friends.sql
             encoding: UTF-8
             splitStatements: false
             endDelimiter: ";"
@@ -85,7 +85,7 @@ databaseChangeLog:
       schemaName: app
       changes:
         - sqlFile:
-            path: import_data/9_recommendations.sql
+            path: src/main/resources/migrations/import_data/9_recommendations.sql
             encoding: UTF-8
             splitStatements: false
             endDelimiter: ";"
@@ -95,7 +95,7 @@ databaseChangeLog:
       schemaName: app
       changes:
         - sqlFile:
-            path: import_data/10_time_tracking.sql
+            path: src/main/resources/migrations/import_data/10_time_tracking.sql
             encoding: UTF-8
             splitStatements: false
             endDelimiter: ";"
@@ -105,7 +105,7 @@ databaseChangeLog:
       schemaName: app
       changes:
         - sqlFile:
-            path: import_data/11_xp.sql
+            path: src/main/resources/migrations/import_data/11_xp.sql
             encoding: UTF-8
             splitStatements: false
             endDelimiter: ";"
