@@ -31,6 +31,31 @@ public class PeersController {
         return "peers"; // Возвращаем имя шаблона "index.html"
     }
 
+    @GetMapping("/add")
+    public String showAddForm(Model model) {
+        model.addAttribute("peer", new PeersDTO());
+        return "peer-form"; // Шаблон для формы добавления/редактирования
+    }
+
+    @GetMapping("/edit/{nickname}")
+    public String showEditForm(@PathVariable String nickname, Model model) {
+        Optional<Peers> peer = peersService.getPeerByNickname(nickname);
+        if (peer.isPresent()) {
+            model.addAttribute("peer", peer.get());
+            return "peer-form"; // Шаблон для формы добавления/редактирования
+        } else {
+            model.addAttribute("error", "Peer with nickname " + nickname + " not found");
+            return "error";
+        }
+    }
+
+    @PostMapping("/save")
+    public String savePeer(@RequestParam String nickname, @RequestParam String birthday) {
+        LocalDate birthDate = LocalDate.parse(birthday);
+        peersService.createPeer(nickname, birthDate);
+        return "redirect:/peers"; // Возвращаемся на страницу списка
+    }
+
     // Страница информации о пользователе
     @GetMapping("/{nickname}")
     public String getPeerByNickname(@PathVariable String nickname, Model model) {
@@ -42,29 +67,5 @@ public class PeersController {
             model.addAttribute("error", "Peer with nickname " + nickname + " not found");
             return "error";
         }
-    }
-
-//    @GetMapping("/{nickname}")
-//    public Optional<Peers> getPeerByNickname(@PathVariable String nickname) {
-//        return peersService.getPeerByNickname(nickname);
-//    }
-
-    @PostMapping
-    public Peers createPeer(@RequestParam String nickname, @RequestParam String birthday) {
-        LocalDate birthDate = LocalDate.parse(birthday); // Парсим строку в LocalDate
-        return peersService.createPeer(nickname, birthDate);
-    }
-
-    @PutMapping("/{nickname}")
-    public String updatePeer(@PathVariable String nickname, @RequestParam String birthday, Model model) {
-        LocalDate newBirthday = LocalDate.parse(birthday);
-        Peers updatedPeer = peersService.updatePeer(nickname, newBirthday);
-        model.addAttribute("peer", updatedPeer);
-        return "peer";
-    }
-
-    @DeleteMapping("/{nickname}")
-    public void deletePeer(@PathVariable String nickname) {
-        peersService.deletePeer(nickname);
     }
 }

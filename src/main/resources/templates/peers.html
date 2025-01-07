@@ -6,6 +6,13 @@
 <body>
 <h1>List of Peers</h1>
 
+<!-- Кнопка для добавления нового пользователя -->
+<div>
+    <a th:href="@{/peers/add}" style="margin-bottom: 10px; display: inline-block;">
+        <button type="button">Add New Peer</button>
+    </a>
+</div>
+
 <!-- Проверяем, если список пустой, выводим сообщение -->
 <div th:if="${#lists.isEmpty(peers)}">
     <p>No peers available.</p>
@@ -23,6 +30,12 @@
     <tr th:each="peer : ${peers}">
         <td><a th:href="@{/peers/{nickname}(nickname=${peer.nickname})}" th:text="${peer.nickname}"></a></td>
         <td th:text="${peer.birthday}"></td>
+        <td>
+            <!-- Кнопка для редактирования -->
+            <a th:href="@{/peers/edit/{nickname}(nickname=${peer.nickname})}">
+                <button type="button">Edit</button>
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>

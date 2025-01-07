@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Peer Form</title>
+</head>
+<body>
+<h1 th:text="${peer.nickname == null ? 'Add New Peer' : 'Edit Peer'}"></h1>
+
+<form th:action="@{/peers/save}" method="post">
+    <input type="hidden" th:if="${peer.nickname != null}" name="nickname" th:value="${peer.nickname}" />
+    <div>
+        <label for="nickname">Nickname:</label>
+        <input type="text" id="nickname" name="nickname" th:disabled="${peer.nickname != null}"
+               th:value="${peer.nickname}" required />
+    </div>
+    <div>
+        <label for="birthday">Birthday:</label>
+        <input type="date" id="birthday" name="birthday" th:value="${peer.birthday}" required />
+    </div>
+    <button type="submit">Save</button>
+    <a th:href="@{/peers}">
+        <button type="button">Cancel</button>
+    </a>
+</form>
+</body>
+</html>
