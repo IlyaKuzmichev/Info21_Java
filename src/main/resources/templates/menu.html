@@ -1,0 +1,12 @@
+<header th:fragment="menu">
+    <!-- Логотип -->
+    <a href="/"><img class="logo" src="/pics/school21logo.svg" alt="Логотип"></a>
+    <!-- Навигационное меню -->
+    <nav>
+        <ul>
+            <li><a th:href="@{/data}">Данные</a></li>
+            <li><a th:href="@{/operations}">Операции</a></li>
+            <li><a th:href="@{/about}">О нас</a></li>
+        </ul>
+    </nav>
+</header>

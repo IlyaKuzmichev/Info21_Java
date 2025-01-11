@@ -1,81 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная страница</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            display: flex;
-            align-items: center;
-            background-color: #f4f4f4;
-            padding: 10px 20px;
-            border-bottom: 1px solid #ccc;
-        }
-        .logo {
-            width: 50px;
-            height: 50px;
-            margin-right: 20px;
-        }
-        nav {
-            flex-grow: 1;
-        }
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-        nav ul li {
-            margin: 0 15px;
-        }
-        nav ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
-        main {
-            padding: 20px;
-        }
-        .about-section {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .about-section h2 {
-            margin-top: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Подключаем внешний CSS файл -->
 </head>
 <body>
-<header>
-    <!-- Логотип -->
-    <img class="logo" src="logo.svg" alt="Логотип">
-
-    <!-- Навигационное меню -->
-    <nav>
-        <ul>
-            <li><a th:href="@{/data}">Данные</a></li>
-            <li><a th:href="@{/operations}">Операции</a></li>
-        </ul>
-    </nav>
-</header>
-
-<main>
-    <!-- Поле "О себе" -->
-    <section class="about-section">
-        <h2>О себе</h2>
-        <p>
-            Здравствуйте! Меня зовут Иван Иванов, я студент, выполняющий данный проект.
-            Цель этого проекта – создать удобное приложение для работы с данными и операциями.
-        </p>
-    </section>
-</main>
+<div class="container">
+    <div th:replace="~{menu :: menu}"></div>
+    <main>
+        <section>
+            <h1>Добро пожаловать!</h1>
+            <p>Это главная страница вашего приложения.</p>
+        </section>
+    </main>
+</div>
 </body>
 </html>
