@@ -60,3 +60,39 @@ main {
     padding: 20px;
     text-align: left;
 }
+
+.submenu {
+    background-color: #171d26;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    text-align: center; /* Центрируем содержимое */
+    font-size: 12px;
+}
+
+.submenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Центрируем пункты подменю */
+}
+
+.submenu ul li {
+    margin: 0 15px;
+}
+
+.submenu ul li a {
+    text-decoration: none;
+    color: #f4f4f9;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+a {
+    color: #D9AEFF;
+}
+
+a:visited {
+    color: #5EA4FF;
+}
+

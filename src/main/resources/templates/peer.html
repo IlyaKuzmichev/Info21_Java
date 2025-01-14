@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Peer Details</title>
+    <title>Peers List</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Подключаем внешний CSS файл -->
 </head>
 <body>
-<h1>Details for: <span th:text="${peer.nickname}"></span></h1>
-
-<p>Birthday: <span th:text="${peer.birthday}"></span></p>
-
-<a href="/peers">Back to list</a>
+<div class="container">
+    <div th:replace="~{menu :: menu}"></div>
+    <div th:replace="~{menu :: submenu}"></div>
+    <main>
+        <h2>Details for: <span th:text="${peer.nickname}"></span></h2>
+        <p>Birthday: <span th:text="${peer.birthday}"></span></p>
+        <a href="/peers">Back to list</a>
+    </main>
+</div>
 </body>
 </html>

@@ -1,43 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Peers List</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Подключаем внешний CSS файл -->
 </head>
 <body>
-<h1>List of Peers</h1>
-
-<!-- Кнопка для добавления нового пользователя -->
-<div>
-    <a th:href="@{/peers/add}" style="margin-bottom: 10px; display: inline-block;">
-        <button type="button">Add New Peer</button>
-    </a>
-</div>
-
-<!-- Проверяем, если список пустой, выводим сообщение -->
-<div th:if="${#lists.isEmpty(peers)}">
-    <p>No peers available.</p>
-</div>
-
-<!-- Если список не пустой, отображаем таблицу -->
-<table border="1" th:if="${!#lists.isEmpty(peers)}">
-    <thead>
-    <tr>
-        <th>Nickname</th>
-        <th>Birthday</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="peer : ${peers}">
-        <td><a th:href="@{/peers/{nickname}(nickname=${peer.nickname})}" th:text="${peer.nickname}"></a></td>
-        <td th:text="${peer.birthday}"></td>
-        <td>
-            <!-- Кнопка для редактирования -->
-            <a th:href="@{/peers/edit/{nickname}(nickname=${peer.nickname})}">
-                <button type="button">Edit</button>
+<div class="container">
+    <div th:replace="~{menu :: menu}"></div>
+    <div th:replace="~{menu :: submenu}"></div>
+    <main>
+        <h2>Peers List</h2>
+        <!-- Кнопка для добавления нового пользователя -->
+        <div>
+            <a th:href="@{/peers/add}" style="margin-bottom: 10px; display: inline-block;">
+                <button type="button">Add New Peer</button>
             </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+        </div>
+
+        <!-- Проверяем, если список пустой, выводим сообщение -->
+        <div th:if="${#lists.isEmpty(peers)}">
+            <p>No peers available.</p>
+        </div>
+
+        <!-- Если список не пустой, отображаем таблицу -->
+        <table border="1" th:if="${!#lists.isEmpty(peers)}">
+            <thead>
+            <tr>
+                <th>Nickname</th>
+                <th>Birthday</th>
+                <th>Edit</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="peer : ${peers}">
+                <td><a th:href="@{/peers/{nickname}(nickname=${peer.nickname})}" th:text="${peer.nickname}"></a></td>
+                <td th:text="${peer.birthday}"></td>
+                <td>
+                    <!-- Кнопка для редактирования -->
+                    <a th:href="@{/peers/edit/{nickname}(nickname=${peer.nickname})}">
+                        <button type="button">Edit</button>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
 </body>
 </html>

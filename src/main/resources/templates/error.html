@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Error</title>
+    <title>Peers List</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Подключаем внешний CSS файл -->
 </head>
 <body>
-<h1><span th:text="${error}"></span></h1>
+<div class="container">
+    <div th:replace="~{menu :: menu}"></div>
+    <main>
+        <h1><span th:text="${error}"></span></h1>
 
-<!-- Ссылка для возвращения на предыдущую страницу или главную -->
-<a th:href="@{${redirectUrl}}">Go back to the previous page</a>
+        <!-- Ссылка для возвращения на предыдущую страницу или главную -->
+        <!--<a th:href="@{${redirectUrl}}">Go back to the previous page</a> -->
+    </main>
+</div>
 </body>
 </html>
