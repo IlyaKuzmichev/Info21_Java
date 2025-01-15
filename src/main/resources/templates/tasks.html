@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Peers List</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Подключаем внешний CSS файл -->
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{menu :: menu}"></div>
+    <div th:replace="~{menu :: submenu}"></div>
+    <main>
+        <h2>Tasks List</h2>
+        <table border="1" th:if="${!#lists.isEmpty(tasks)}">
+            <thead>
+            <tr>
+                <th>Task name</th>
+                <th>Parent task</th>
+                <th>Max XP</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="task : ${tasks}">
+                <td><a th:href="@{/tasks/{title}(title=${task.title})}" th:text="${task.title}"></a></td>
+                <td th:text="${task.parentTask}"></td>
+                <td th:text="${task.maxXp}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+</body>
+</html>
