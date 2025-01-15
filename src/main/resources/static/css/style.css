@@ -14,7 +14,7 @@ body {
     width: 100%;
     min-width: 600px;
     max-width: 50%;
-    margin: 20px auto; /* Центрирование контейнера с отступами сверху и снизу */
+    margin: 0px auto; /* Центрирование контейнера с отступами сверху и снизу */
     background-color: #2C384A;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -25,14 +25,15 @@ header {
     justify-content: center; /* Центрирование меню */
     align-items: center;
     background-color: #1d2633;
-    padding: 10px 20px;
-    border-bottom: 1px solid #aebbca;
+    /* padding: 10px 20px; */
+    /* border-bottom: 1px solid #aebbca; */
 }
 
 .logo {
-    width: 100px;
+    /* width: 100px; */
     height: 100px;
     margin-right: 20px;
+    margin-top: -10px;
 }
 
 nav {
@@ -64,7 +65,7 @@ main {
 .submenu {
     background-color: #171d26;
     padding: 10px 20px;
-    border-bottom: 1px solid #ddd;
+    /* border-bottom: 1px solid #ddd; */
     text-align: center; /* Центрируем содержимое */
     font-size: 12px;
 }
