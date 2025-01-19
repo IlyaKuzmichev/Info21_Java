@@ -10,6 +10,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./src/main/resources/schema.sql:/docker-entrypoint-initdb.d/init-script.sql
+      - ./shared:/shared
     ports:
       - "5432:5432"
 
