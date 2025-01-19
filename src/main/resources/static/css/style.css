@@ -14,7 +14,7 @@ body {
     width: 100%;
     min-width: 600px;
     max-width: 50%;
-    margin: 0px auto; /* Центрирование контейнера с отступами сверху и снизу */
+    margin: 0px auto;
     background-color: #2C384A;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -22,7 +22,7 @@ body {
 
 header {
     display: flex;
-    justify-content: center; /* Центрирование меню */
+    justify-content: center;
     align-items: center;
     background-color: #1d2633;
     /* padding: 10px 20px; */
@@ -66,7 +66,7 @@ main {
     background-color: #171d26;
     padding: 10px 20px;
     /* border-bottom: 1px solid #ddd; */
-    text-align: center; /* Центрируем содержимое */
+    text-align: center;
     font-size: 12px;
 }
 
@@ -75,7 +75,7 @@ main {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center; /* Центрируем пункты подменю */
+    justify-content: center;
 }
 
 .submenu ul li {

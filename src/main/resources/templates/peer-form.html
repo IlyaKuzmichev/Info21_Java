@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Peer Form</title>
-    <link rel="stylesheet" href="/css/style.css"> <!-- Подключаем внешний CSS файл -->
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="/js/confirm_form.js"></script>
 </head>
 <body>
 <div class="container">
@@ -11,7 +12,7 @@
     <main>
         <h2 th:text="${peer.nickname == null ? 'Add New Peer' : 'Edit Peer'}"></h2>
 
-        <form th:action="@{/peers/save}" method="post">
+        <form th:action="@{/peers/save}" method="post" data-confirm="Вы уверены?">
             <input type="hidden" th:if="${peer.nickname != null}" name="nickname" th:value="${peer.nickname}" />
             <div>
                 <label for="nickname">Nickname:</label>
