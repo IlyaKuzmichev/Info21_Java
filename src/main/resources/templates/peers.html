@@ -19,11 +19,11 @@
             </a>
 
             <!-- Добавление формы для загрузки файла -->
-            <form th:action="@{/data/import}" method="post" enctype="multipart/form-data" style="margin-top: 20px;">
-                <label for="file">Upload CSV File:</label>
-                <input type="file" id="file" name="file" required>
+            <form th:action="@{/data/import}" method="post" enctype="multipart/form-data" style="margin-top: 10px; display: inline-block;">
                 <input type="hidden" name="tableName" value="peers">
                 <button type="submit">Import CSV</button>
+                <label for="file">Upload CSV File:</label>
+                <input type="file" id="file" name="file" required>
             </form>
         </div>
 

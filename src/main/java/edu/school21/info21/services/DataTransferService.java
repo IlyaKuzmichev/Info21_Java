@@ -3,8 +3,9 @@ package edu.school21.info21.services;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -16,6 +17,10 @@ public class DataTransferService {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Value("${shared.path}")
+    private String sharedPath;
+
 
     @Transactional
     public byte[] exportToCsv(String tableName, String fileName, String columns) {
@@ -55,13 +60,14 @@ public class DataTransferService {
 
     @Transactional
     public void importFromCsv(String tableName, String columns, MultipartFile file) {
+
         String fileName = file.getOriginalFilename();
+        String filePath = sharedPath + fileName;
+        String fileAbsPath = "/shared/" + fileName;
         if (fileName == null || !fileName.endsWith(".csv")) {
             throw new IllegalArgumentException("Файл должен быть в формате CSV.");
         }
 
-        // Сохраняем файл во временное хранилище
-        String filePath = "/shared/" + fileName;
         File tempFile = new File(filePath);
         try {
             file.transferTo(tempFile);
@@ -76,7 +82,7 @@ public class DataTransferService {
 
             Query query = entityManager.createNativeQuery(sql);
             query.setParameter("tbl", tableNameWithSchema);
-            query.setParameter("filename", filePath);
+            query.setParameter("filename", fileAbsPath);
             query.setParameter("columns", columns != null ? columns : "");
             query.executeUpdate();
         } catch (Exception e) {

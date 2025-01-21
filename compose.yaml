@@ -32,4 +32,5 @@ services:
     command:
       - update
 volumes:
+  shared:
   postgres_data:
