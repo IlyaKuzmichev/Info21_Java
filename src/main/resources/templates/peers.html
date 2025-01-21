@@ -17,6 +17,14 @@
             <a th:href="@{/data/export?tableName=peers&fileName=peers.csv}" style="margin-bottom: 10px; display: inline-block;">
                 <button type="button">Export Peers to CSV</button>
             </a>
+
+            <!-- Добавление формы для загрузки файла -->
+            <form th:action="@{/data/import}" method="post" enctype="multipart/form-data" style="margin-top: 20px;">
+                <label for="file">Upload CSV File:</label>
+                <input type="file" id="file" name="file" required>
+                <input type="hidden" name="tableName" value="peers">
+                <button type="submit">Import CSV</button>
+            </form>
         </div>
 
         <div th:if="${#lists.isEmpty(peers)}">

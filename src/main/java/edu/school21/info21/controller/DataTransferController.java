@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/data")
@@ -40,5 +38,20 @@ public class DataTransferController {
                 .headers(headers)
                 .body(csvData);
     }
+
+    @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<String> importFromCsv(
+            @RequestParam String tableName,
+            @RequestParam(required = false) String columns,
+            @RequestParam("file") MultipartFile file
+    ) {
+        try {
+            dataTransferService.importFromCsv(tableName, columns, file);
+            return ResponseEntity.ok("Данные успешно импортированы из файла в таблицу " + tableName);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Ошибка импорта: " + e.getMessage());
+        }
+    }
+
 
 }

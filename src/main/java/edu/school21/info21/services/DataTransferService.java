@@ -5,6 +5,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,6 +49,42 @@ public class DataTransferService {
             File file = new File(fileAbsPath);
             if (file.exists()) {
                 file.delete();
+            }
+        }
+    }
+
+    @Transactional
+    public void importFromCsv(String tableName, String columns, MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+        if (fileName == null || !fileName.endsWith(".csv")) {
+            throw new IllegalArgumentException("Файл должен быть в формате CSV.");
+        }
+
+        // Сохраняем файл во временное хранилище
+        String filePath = "/shared/" + fileName;
+        File tempFile = new File(filePath);
+        try {
+            file.transferTo(tempFile);
+        } catch (IOException e) {
+            throw new RuntimeException("Ошибка сохранения файла: " + e.getMessage(), e);
+        }
+
+        try {
+            // Вызов хранимой процедуры
+            String tableNameWithSchema = "app." + tableName;
+            String sql = "CALL app.import_from_csv(:tbl, :filename, :columns)";
+
+            Query query = entityManager.createNativeQuery(sql);
+            query.setParameter("tbl", tableNameWithSchema);
+            query.setParameter("filename", filePath);
+            query.setParameter("columns", columns != null ? columns : "");
+            query.executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException("Ошибка при вызове процедуры импорта: " + e.getMessage(), e);
+        } finally {
+            // Удаляем временный файл
+            if (tempFile.exists()) {
+                tempFile.delete();
             }
         }
     }
