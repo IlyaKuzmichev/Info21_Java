@@ -8,10 +8,20 @@
 <div class="container">
     <div th:replace="~{menu :: menu}"></div>
     <main>
-        <h2>Операции</h2>
-        <p>
-            Тут будут операции
-        </p>
+        <h1>SQL Query Executor</h1>
+        <div class="query-buttons">
+            <button type="button" onclick="insertQuery('SELECT * FROM peers;')">Пиры</button>
+            <button type="button" onclick="insertQuery('SELECT * FROM tasks;')">Задачи</button>
+            <button type="button" onclick="insertQuery('SELECT * FROM checks WHERE date > \'2023-01-01\';')">Проверки 2023</button>
+        </div>
+        <form id="sql-form">
+            <label for="sql-query">Введите SQL-запрос:</label><br>
+            <textarea id="sql-query" name="sql" placeholder="SELECT * FROM table_name"></textarea><br>
+            <button type="submit">Выполнить</button>
+            <button type="button" onclick="clearQuery()">Очистить</button>
+        </form>
+        <div id="result"></div>
+        <script type="text/javascript" src="/js/operations.js"></script>
     </main>
 </div>
 </body>
