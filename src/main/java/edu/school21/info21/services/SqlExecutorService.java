@@ -5,6 +5,8 @@ import jakarta.persistence.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class SqlExecutorService {
 
@@ -25,7 +27,8 @@ public class SqlExecutorService {
                     query.toLowerCase().startsWith("update") ||
                     query.toLowerCase().startsWith("delete")) {
                 int affectedRows = sqlExecutorRepository.executeUpdateQuery(query);
-                return "Запрос выполнен успешно. Затронуто строк: " + affectedRows;
+                return Map.of("message", "Запрос выполнен успешно.", "affectedRows", affectedRows);
+                //return "Запрос выполнен успешно. Затронуто строк: " + affectedRows;
             } else {
                 throw new IllegalArgumentException("Неподдерживаемый тип SQL-запроса. Разрешены только SELECT, INSERT, UPDATE, DELETE.");
             }

@@ -3,6 +3,7 @@ package edu.school21.info21.repositories;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,11 +21,20 @@ public class SqlExecutorRepository {
         }
     }
 
+    @Transactional
     public int executeUpdateQuery(String query) {
         try {
             return entityManager.createNativeQuery(query).executeUpdate();
         } catch (PersistenceException e) {
-            throw new IllegalArgumentException("Ошибка выполнения запроса: " + e.getCause().getMessage(), e);
+            throw new IllegalArgumentException(getErrorMessage(e), e);
+        }
+    }
+
+    private String getErrorMessage(PersistenceException e) {
+        if (e.getCause() != null) {
+            return e.getCause().getMessage();
+        } else {
+            return "Ошибка выполнения SQL-запроса: " + e.getMessage();
         }
     }
 }

@@ -30,25 +30,36 @@ document.getElementById('sql-form').addEventListener('submit', async (e) => {
         }
 
         const result = await response.json();
-        if (Array.isArray(result)) {
-            let table = '<table border="1" cellspacing="0" cellpadding="5"><thead><tr>';
-            Object.keys(result[0]).forEach(col => {
-                table += `<th>${col}</th>`;
-            });
-            table += '</tr></thead><tbody>';
-            result.forEach(row => {
-                table += '<tr>';
-                Object.values(row).forEach(val => {
-                    table += `<td>${val !== null ? val : ''}</td>`;
+
+        if (result.affectedRows !== undefined && result.message) {
+                    resultDiv.innerHTML = `
+                        <div style="color: green;">
+                            ${result.message}<br>
+                            Затронуто строк: ${result.affectedRows}
+                        </div>`;
+        } else if (Array.isArray(result)) {
+            if (result.length > 0) {
+                let table = '<table border="1" cellspacing="0" cellpadding="5"><thead><tr>';
+                Object.keys(result[0]).forEach(col => {
+                    table += `<th>${col}</th>`;
                 });
-                table += '</tr>';
-            });
-            table += '</tbody></table>';
-            resultDiv.innerHTML = table;
+                table += '</tr></thead><tbody>';
+                result.forEach(row => {
+                    table += '<tr>';
+                    Object.values(row).forEach(val => {
+                        table += `<td>${val !== null ? val : ''}</td>`;
+                    });
+                    table += '</tr>';
+                });
+                table += '</tbody></table>';
+                resultDiv.innerHTML = table;
+            } else {
+                resultDiv.innerHTML = `<div style="color: gray;">Запрос не вернул данных.</div>`;
+            }
         } else {
-            resultDiv.innerHTML = `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+            resultDiv.innerHTML = `<div>${JSON.stringify(result, null, 2)}</div>`;
         }
     } catch (error) {
-        resultDiv.innerHTML = `<pre style="color: red;">Ошибка: ${error.message}</pre>`;
+        resultDiv.innerHTML = `<div style="color: red;">Ошибка: ${error.message}</div>`;
     }
 });

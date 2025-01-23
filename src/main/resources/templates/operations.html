@@ -13,6 +13,7 @@
             <button type="button" onclick="insertQuery('SELECT * FROM peers;')">Пиры</button>
             <button type="button" onclick="insertQuery('SELECT * FROM tasks;')">Задачи</button>
             <button type="button" onclick="insertQuery('SELECT * FROM checks WHERE date > \'2023-01-01\';')">Проверки 2023</button>
+            <button type="button" onclick="insertQuery('UPDATE app.peers set birthday=\'2002-02-02\' WHERE nickname=\'Aboba\';')">Изменить д/р пира</button>
         </div>
         <form id="sql-form">
             <label for="sql-query">Введите SQL-запрос:</label><br>
