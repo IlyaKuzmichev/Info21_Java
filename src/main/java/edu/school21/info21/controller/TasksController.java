@@ -25,6 +25,7 @@ public class TasksController {
     public String tasks(Model model) {
         List<TasksDTO> tasksList = tasksService.getAllTasks(); // Получаем список задач
         model.addAttribute("tasks", tasksList);
+        model.addAttribute("activePage", "tasks");
         return "tasks";
     }
 }

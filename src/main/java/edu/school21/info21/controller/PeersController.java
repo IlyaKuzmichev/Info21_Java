@@ -28,12 +28,14 @@ public class PeersController {
     public String peers(Model model) {
         List<PeersDTO> peersList = peersService.getAllPeers();
         model.addAttribute("peers", peersList);
+        model.addAttribute("activePage", "peers");
         return "peers"; // Возвращаем имя шаблона "index.html"
     }
 
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("peer", new PeersDTO());
+        model.addAttribute("activePage", "peers");
         return "peer-form"; // Шаблон для формы добавления/редактирования
     }
 
@@ -42,6 +44,7 @@ public class PeersController {
         Optional<Peers> peer = peersService.getPeerByNickname(nickname);
         if (peer.isPresent()) {
             model.addAttribute("peer", peer.get());
+            model.addAttribute("activePage", "peers");
             return "peer-form"; // Шаблон для формы добавления/редактирования
         } else {
             model.addAttribute("error", "Peer with nickname " + nickname + " not found");
@@ -62,6 +65,7 @@ public class PeersController {
         Optional<Peers> peer = peersService.getPeerByNickname(nickname);
         if (peer.isPresent()) {
             model.addAttribute("peer", peer.get());
+            model.addAttribute("activePage", "peers");
             return "peer"; // Возвращаем шаблон peer.html
         } else {
             model.addAttribute("error", "Peer with nickname " + nickname + " not found");

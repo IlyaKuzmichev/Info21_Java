@@ -1,11 +1,23 @@
-function clearQuery() {
-    const textarea = document.getElementById('sql-query');
-    textarea.value = ''; // Очищает поле
-}
+document.querySelectorAll('.tab-link').forEach(tab => {
+    tab.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // Убираем активные классы
+        document.querySelectorAll('.tab-link').forEach(link => link.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+        // Активируем выбранную вкладку
+        this.classList.add('active');
+        document.getElementById(this.dataset.tab).classList.add('active');
+    });
+});
 
 function insertQuery(query) {
-    const textarea = document.getElementById('sql-query');
-    textarea.value = query;
+    document.getElementById('sql-query').value = query;
+}
+
+function clearQuery() {
+    document.getElementById('sql-query').value = '';
 }
 
 

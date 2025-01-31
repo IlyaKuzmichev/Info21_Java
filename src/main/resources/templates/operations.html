@@ -3,17 +3,44 @@
 <head>
     <title>Операции</title>
     <link rel="stylesheet" href="/css/style.css">
+    <style>
+
+    </style>
 </head>
 <body>
 <div class="container">
     <div th:replace="~{menu :: menu}"></div>
+    <!-- Субменю как на странице пиров, но теперь работает как табы -->
+    <header class="submenu">
+        <nav>
+            <ul>
+                <li><a href="#" class="tab-link active" data-tab="peers">😺 Пиры</a></li>
+                <li><a href="#" class="tab-link" data-tab="tasks">📋 Таски</a></li>
+                <li><a href="#" class="tab-link" data-tab="checks">🔬 Проверки</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-        <h1>SQL Query Executor</h1>
-        <div class="query-buttons">
-            <button type="button" onclick="insertQuery('SELECT * FROM peers;')">Пиры</button>
-            <button type="button" onclick="insertQuery('SELECT * FROM tasks;')">Задачи</button>
-            <button type="button" onclick="insertQuery('SELECT * FROM checks WHERE date > \'2023-01-01\';')">Проверки 2023</button>
-            <button type="button" onclick="insertQuery('UPDATE app.peers set birthday=\'2002-02-02\' WHERE nickname=\'Aboba\';')">Изменить д/р пира</button>
+<!--        <h1>SQL Query Executor</h1>-->
+
+        <!-- Контейнеры вкладок -->
+        <div id="peers" class="tab-content active">
+            <button onclick="insertQuery('SELECT * FROM peers;')">Вывести всех</button>
+            <button onclick="insertQuery('INSERT INTO peers (nickname, birthday) VALUES (\'NewPeer\', \'2000-01-01\');')">Добавить пира</button>
+            <button onclick="insertQuery('DELETE FROM peers WHERE nickname=\'OldPeer\';')">Удалить пира</button>
+        </div>
+
+        <div id="tasks" class="tab-content">
+            <button onclick="insertQuery('SELECT * FROM tasks;')">Вывести все таски</button>
+            <button onclick="insertQuery('UPDATE tasks SET max_xp=100 WHERE title=\'Task1\';')">Обновить XP таска</button>
+            <button onclick="insertQuery('DELETE FROM tasks WHERE title=\'OldTask\';')">Удалить таск</button>
+        </div>
+
+        <div id="checks" class="tab-content">
+            <button onclick="insertQuery('SELECT * FROM checks WHERE date > \'2023-01-01\';')">Проверки 2023</button>
+            <button onclick="insertQuery('INSERT INTO checks (peer, task, status) VALUES (\'Aboba\', \'Task1\', \'passed\');')">Добавить проверку</button>
+            <button onclick="insertQuery('DELETE FROM checks WHERE peer=\'Aboba\';')">Удалить проверки пира</button>
         </div>
         <form id="sql-form">
             <label for="sql-query">Введите SQL-запрос:</label><br>
@@ -23,6 +50,9 @@
         </form>
         <div id="result"></div>
         <script type="text/javascript" src="/js/operations.js"></script>
+        <script>
+
+        </script>
     </main>
 </div>
 </body>

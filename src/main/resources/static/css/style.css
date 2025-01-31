@@ -62,47 +62,12 @@ main {
     text-align: left;
 }
 
-.submenu {
-    background-color: #171d26;
-    padding: 10px 20px;
-    /* border-bottom: 1px solid #ddd; */
-    text-align: center;
-    font-size: 12px;
-}
-
-.submenu ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
-.submenu ul li {
-    margin: 0 15px;
-}
-
-.submenu ul li a {
-    text-decoration: none;
-    color: #f4f4f9;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
 a {
     color: #D9AEFF;
 }
 
 a:visited {
     color: #5EA4FF;
-}
-
-textarea {
-    width: 95%;
-    height: 150px;
-    font-family: monospace;
-    font-size: 14px;
-    margin-bottom: 10px;
 }
 
 .query-buttons button {
@@ -125,6 +90,7 @@ button:hover {
     background-color: #A24FEA;
     color: white;
 }
+
 #result {
     margin-top: 20px;
     padding: 10px;
@@ -132,5 +98,86 @@ button:hover {
     background-color: #1d2633;
     word-wrap: break-word;
     overflow-wrap: break-word;
+}
+
+/* Стили для табов */
+.submenu {
+    background-color: #171d26;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.submenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.submenu ul li {
+    margin: 0 15px;
+}
+
+.submenu ul li a {
+    text-decoration: none;
+    color: #f4f4f9;
+    font-weight: bold;
+    transition: color 0.3s, background 0.3s;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.submenu ul li a.active {
+    background-color: #2C384A;
+    color: #44EB99;
+}
+
+/* Контент табов */
+.tab-content {
+    display: none;
+    padding: 20px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Стили кнопок */
+.query-buttons button {
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #44EB99;
+    border: none;
+    border-radius: 8px;
+    color: black;
+    transition: background 0.3s, color 0.3s;
+}
+
+.query-buttons button:hover {
+    background-color: #A24FEA;
+    color: white;
+}
+
+/* Текстовое поле для SQL-запроса */
+textarea {
+    width: 100%;
+    height: 120px;
+    font-family: monospace;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #1d2633;
+    color: #d2d9e1;
+    border: 1px solid #5EA4FF;
+}
+
+/* Кнопки формы */
+.form-buttons button {
+    margin-top: 10px;
+    width: 100%;
 }
 

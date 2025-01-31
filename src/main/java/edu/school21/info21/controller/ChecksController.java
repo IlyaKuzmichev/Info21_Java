@@ -26,6 +26,7 @@ public class ChecksController {
     public String checks(Model model) {
         List<ChecksDTO> checksList = checksService.getAllChecks();
         model.addAttribute("checks", checksList);
+        model.addAttribute("activePage", "checks");
         return "checks";
     }
 }
