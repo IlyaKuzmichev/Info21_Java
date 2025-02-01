@@ -38,10 +38,18 @@
         </div>
 
         <div id="checks" class="tab-content">
+            <button onclick="insertQuery('SELECT * FROM p2p;', 'Каждая P2P проверка состоит из 2-х записей в таблице: первая имеет статус начало, вторая - успех или неуспех.\n'+
+'В таблице не может быть больше одной незавершенной P2P проверки, относящейся к конкретному заданию, пиру и проверяющему.\n'+
+'Каждая P2P проверка (т.е. обе записи, из которых она состоит) ссылается на проверку в таблице Checks, к которой она относится.')">Вывести все p2p проверки</button>
+            <button onclick="insertQuery('CALL add_p2p_check(\'Baboba\', \'Derevo\', \'DO3_LinuxMonitoring_v1.0\', \'Start\', \'13:00\');', 'Параметры: ник проверяемого, ник проверяющего, название задания, статус P2P проверки, время. Если статус \'начало\', добавляет запись в Checks и P2P. В противном случае связывает с существующей проверкой.')">Добавить проверку для пира</button>
             <button onclick="insertQuery('SELECT * FROM checks WHERE date > \'2023-01-01\';')">Проверки 2023</button>
             <button onclick="insertQuery('INSERT INTO checks (peer, task, status) VALUES (\'Aboba\', \'Task1\', \'passed\');')">Добавить проверку</button>
             <button onclick="insertQuery('DELETE FROM checks WHERE peer=\'Aboba\';')">Удалить проверки пира</button>
         </div>
+
+        <!-- Блок с описанием -->
+        <div id="query-description" class="query-description">Выберите операцию, чтобы увидеть описание.</div>
+
         <form id="sql-form">
             <label for="sql-query">Введите SQL-запрос:</label><br>
             <textarea id="sql-query" name="sql" placeholder="SELECT * FROM table_name"></textarea><br>

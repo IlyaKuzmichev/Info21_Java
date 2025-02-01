@@ -1,23 +1,24 @@
-document.querySelectorAll('.tab-link').forEach(tab => {
-    tab.addEventListener('click', function (event) {
-        event.preventDefault();
-
-        // Убираем активные классы
-        document.querySelectorAll('.tab-link').forEach(link => link.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-        // Активируем выбранную вкладку
-        this.classList.add('active');
-        document.getElementById(this.dataset.tab).classList.add('active');
+document.addEventListener("DOMContentLoaded", function () {
+    // Переключение вкладок
+    document.querySelectorAll(".tab-link").forEach(tab => {
+        tab.addEventListener("click", function (event) {
+            event.preventDefault();
+            document.querySelectorAll(".tab-link").forEach(t => t.classList.remove("active"));
+            document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
+            this.classList.add("active");
+            document.getElementById(this.dataset.tab).classList.add("active");
+        });
     });
 });
 
-function insertQuery(query) {
-    document.getElementById('sql-query').value = query;
+function insertQuery(query, description) {
+    document.getElementById("sql-query").value = query;
+    document.getElementById("query-description").textContent = description || "Тут будет описание операции.";
 }
 
 function clearQuery() {
-    document.getElementById('sql-query').value = '';
+    document.getElementById("sql-query").value = "";
+    document.getElementById("query-description").textContent = "Выберите операцию, чтобы увидеть описание.";
 }
 
 

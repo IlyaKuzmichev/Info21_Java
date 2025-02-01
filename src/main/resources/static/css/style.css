@@ -85,6 +85,7 @@ button {
     color: black;
     border: none;
     cursor: pointer;
+    margin-bottom: 5px;
 }
 button:hover {
     background-color: #A24FEA;
@@ -160,6 +161,17 @@ button:hover {
 .query-buttons button:hover {
     background-color: #A24FEA;
     color: white;
+}
+
+.query-description {
+    background-color: #171d26;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #f4f4f9;
+    text-align: left;
+    margin-bottom: 10px;
 }
 
 /* Текстовое поле для SQL-запроса */

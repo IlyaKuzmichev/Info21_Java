@@ -2,7 +2,7 @@ server:
   port: 8081
 
 shared:
-  path: ${SHARED_PATH:/mnt/d/PROJECTS/IdeaProjects/Info21_Java/shared/}
+  path: ${SHARED_PATH:D:\PROJECTS\IdeaProjects\Info21_Java\shared\}
 
 spring:
   application:

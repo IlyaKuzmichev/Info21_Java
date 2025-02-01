@@ -25,7 +25,8 @@ public class SqlExecutorService {
                 return sqlExecutorRepository.executeSelectQuery(query);
             } else if (query.toLowerCase().startsWith("insert") ||
                     query.toLowerCase().startsWith("update") ||
-                    query.toLowerCase().startsWith("delete")) {
+                    query.toLowerCase().startsWith("delete") ||
+                    query.toLowerCase().startsWith("call")) {
                 int affectedRows = sqlExecutorRepository.executeUpdateQuery(query);
                 return Map.of("message", "Запрос выполнен успешно.", "affectedRows", affectedRows);
                 //return "Запрос выполнен успешно. Затронуто строк: " + affectedRows;
