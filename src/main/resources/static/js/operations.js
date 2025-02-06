@@ -1,12 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Переключение вкладок
-    document.querySelectorAll(".tab-link").forEach(tab => {
-        tab.addEventListener("click", function (event) {
-            event.preventDefault();
-            document.querySelectorAll(".tab-link").forEach(t => t.classList.remove("active"));
-            document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
-            this.classList.add("active");
-            document.getElementById(this.dataset.tab).classList.add("active");
+    let tabs = document.querySelectorAll(".tab-link");
+    let contents = document.querySelectorAll(".tab-content");
+
+    // Устанавливаем активную вкладку и контент при загрузке страницы
+    if (tabs.length > 0) {
+        tabs[0].classList.add("active"); // Активируем первую вкладку
+        if (contents.length > 0) {
+            contents[0].classList.add("active"); // Активируем первый контент
+        }
+    }
+
+    tabs.forEach(tab => {
+        tab.addEventListener("click", function () {
+            tabs.forEach(t => t.classList.remove("active"));
+            contents.forEach(c => c.classList.remove("active"));
+
+            tab.classList.add("active");
+            document.getElementById(tab.getAttribute("data-tab")).classList.add("active");
         });
     });
 });

@@ -20,32 +20,39 @@
             </ul>
         </nav>
     </header>
-
     <main>
+        <div th:each="category : ${queries}" th:id="${category.getKey()}" class="tab-content"
+             th:classappend="${category == 'checks'} ? 'active'">
+            <th:block th:each="query : ${queries[category.getKey()]}">
+                <button th:data-query="${query.query}" th:data-description="${query.description}"
+                        th:onclick="'insertQuery(this.dataset.query, this.dataset.description)'">
+                    <span th:text="${query.name}"></span>
+                </button>
+            </th:block>
+        </div>
+
 <!--        <h1>SQL Query Executor</h1>-->
-
         <!-- Контейнеры вкладок -->
-        <div id="peers" class="tab-content active">
-            <button onclick="insertQuery('SELECT * FROM peers;')">Вывести всех</button>
-            <button onclick="insertQuery('INSERT INTO peers (nickname, birthday) VALUES (\'NewPeer\', \'2000-01-01\');')">Добавить пира</button>
-            <button onclick="insertQuery('DELETE FROM peers WHERE nickname=\'OldPeer\';')">Удалить пира</button>
-        </div>
+<!--        <div id="peers" class="tab-content active">-->
+<!--            <button onclick="insertQuery('SELECT * FROM peers;')">Вывести список всех пиров</button>-->
+<!--            <button onclick="insertQuery('INSERT INTO peers (nickname, birthday) VALUES (\'NewPeer\', \'2000-01-01\');')">Добавить пира</button>-->
+<!--            <button onclick="insertQuery('DELETE FROM peers WHERE nickname=\'OldPeer\';')">Удалить пира</button>-->
+<!--        </div>-->
 
-        <div id="tasks" class="tab-content">
-            <button onclick="insertQuery('SELECT * FROM tasks;')">Вывести все таски</button>
-            <button onclick="insertQuery('UPDATE tasks SET max_xp=100 WHERE title=\'Task1\';')">Обновить XP таска</button>
-            <button onclick="insertQuery('DELETE FROM tasks WHERE title=\'OldTask\';')">Удалить таск</button>
-        </div>
+<!--        <div id="tasks" class="tab-content">-->
+<!--            <button onclick="insertQuery('SELECT * FROM tasks;')">Вывести все таски</button>-->
+<!--            <button onclick="insertQuery('UPDATE tasks SET max_xp=100 WHERE title=\'Task1\';')">Обновить XP таска</button>-->
+<!--            <button onclick="insertQuery('DELETE FROM tasks WHERE title=\'OldTask\';')">Удалить таск</button>-->
+<!--        </div>-->
 
-        <div id="checks" class="tab-content">
-            <button onclick="insertQuery('SELECT * FROM p2p;', 'Каждая P2P проверка состоит из 2-х записей в таблице: первая имеет статус начало, вторая - успех или неуспех.\n'+
-'В таблице не может быть больше одной незавершенной P2P проверки, относящейся к конкретному заданию, пиру и проверяющему.\n'+
-'Каждая P2P проверка (т.е. обе записи, из которых она состоит) ссылается на проверку в таблице Checks, к которой она относится.')">Вывести все p2p проверки</button>
-            <button onclick="insertQuery('CALL add_p2p_check(\'Baboba\', \'Derevo\', \'DO3_LinuxMonitoring_v1.0\', \'Start\', \'13:00\');', 'Параметры: ник проверяемого, ник проверяющего, название задания, статус P2P проверки, время. Если статус \'начало\', добавляет запись в Checks и P2P. В противном случае связывает с существующей проверкой.')">Добавить проверку для пира</button>
-            <button onclick="insertQuery('SELECT * FROM checks WHERE date > \'2023-01-01\';')">Проверки 2023</button>
-            <button onclick="insertQuery('INSERT INTO checks (peer, task, status) VALUES (\'Aboba\', \'Task1\', \'passed\');')">Добавить проверку</button>
-            <button onclick="insertQuery('DELETE FROM checks WHERE peer=\'Aboba\';')">Удалить проверки пира</button>
-        </div>
+<!--        <div id="checks" class="tab-content">-->
+<!--            <button onclick="insertQuery('CALL add_p2p_check(\'Baboba\', \'Derevo\', \'DO3_LinuxMonitoring_v1.0\', \'Start\', \'13:00\');','Параметры: ник проверяемого, ник проверяющего, название задания, статус P2P проверки, время.\n'+'Если задан статус \'начало\', добавить запись в таблицу Checks (в качестве даты использовать сегодняшнюю).\n'+'Добавить запись в таблицу P2P.\n'+'Если задан статус \'начало\', в качестве проверки указать только что добавленную запись, иначе указать'+' проверку с незавершенным P2P этапом.')">Добавление P2P проверки</button>-->
+<!--            <button onclick="insertQuery('SELECT * FROM p2p;', 'Каждая P2P проверка состоит из 2-х записей в таблице: первая имеет статус начало, вторая - успех или неуспех.\nВ таблице не может быть больше одной незавершенной P2P проверки, относящейся к конкретному заданию, пиру и проверяющему.\nКаждая P2P проверка (т.е. обе записи, из которых она состоит) ссылается на проверку в таблице Checks, к которой она относится.')">Вывести все p2p проверки</button>-->
+<!--            <button onclick="insertQuery('CALL add_p2p_check(\'Baboba\', \'Derevo\', \'DO3_LinuxMonitoring_v1.0\', \'Start\', \'13:00\');', 'Параметры: ник проверяемого, ник проверяющего, название задания, статус P2P проверки, время. Если статус \'начало\', добавляет запись в Checks и P2P. В противном случае связывает с существующей проверкой.')">Добавить проверку для пира</button>-->
+<!--            <button onclick="insertQuery('SELECT * FROM checks WHERE date > \'2023-01-01\';')">Проверки 2023</button>-->
+<!--            <button onclick="insertQuery('INSERT INTO checks (peer, task, status) VALUES (\'Aboba\', \'Task1\', \'passed\');')">Добавить проверку</button>-->
+<!--            <button onclick="insertQuery('DELETE FROM checks WHERE peer=\'Aboba\';')">Удалить проверки пира</button>-->
+<!--        </div>-->
 
         <!-- Блок с описанием -->
         <div id="query-description" class="query-description">Выберите операцию, чтобы увидеть описание.</div>
@@ -58,9 +65,6 @@
         </form>
         <div id="result"></div>
         <script type="text/javascript" src="/js/operations.js"></script>
-        <script>
-
-        </script>
     </main>
 </div>
 </body>
