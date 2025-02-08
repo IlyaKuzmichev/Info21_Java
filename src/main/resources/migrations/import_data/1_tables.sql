@@ -118,30 +118,56 @@ CREATE TABLE IF NOT EXISTS verter (
     FOREIGN KEY ("check") REFERENCES checks(id)
 );
 
+-- CREATE OR REPLACE FUNCTION fnc_trg_verter_after_p2p() RETURNS trigger
+-- AS $$
+--     DECLARE
+-- check_id integer;
+-- BEGIN
+--        IF TG_OP IN ('INSERT', 'UPDATE') THEN
+--            check_id := NEW."check";
+--        ELSIF TG_OP = 'DELETE' THEN
+--            check_id := OLD."check";
+-- END IF;
+--
+--        IF EXISTS (
+--            SELECT COUNT(*)
+--              FROM verter
+--                   LEFT JOIN p2p p on verter."check" = p."check"
+--             WHERE verter."check" = check_id
+--             GROUP BY verter."check"
+--            HAVING NOT bool_or(p.state = 'Success')
+--                 OR max(p.time::time) > min(verter.time::time)
+--            )
+--        THEN
+--           RAISE EXCEPTION 'verter check must be preceded by a successful P2P check';
+-- END IF;
+-- RETURN NULL;
+-- END;
+-- $$ LANGUAGE plpgsql;
+
 CREATE OR REPLACE FUNCTION fnc_trg_verter_after_p2p() RETURNS trigger
 AS $$
-    DECLARE
-check_id integer;
+DECLARE
+    check_id integer;
 BEGIN
-       IF TG_OP IN ('INSERT', 'UPDATE') THEN
-           check_id := NEW."check";
-       ELSIF TG_OP = 'DELETE' THEN
-           check_id := OLD."check";
-END IF;
+    -- Определяем идентификатор проверки
+    IF TG_OP IN ('INSERT', 'UPDATE') THEN
+        check_id := NEW."check";
+    ELSIF TG_OP = 'DELETE' THEN
+        check_id := OLD."check";
+    END IF;
 
-       IF EXISTS (
-           SELECT COUNT(*)
-             FROM verter
-                  LEFT JOIN p2p p on verter."check" = p."check"
-            WHERE verter."check" = check_id
-            GROUP BY verter."check"
-           HAVING NOT bool_or(p.state = 'Success')
-                  OR max(p.time) > min(verter.time)
-           )
-       THEN
-          RAISE EXCEPTION 'verter check must be preceded by a successful P2P check';
-END IF;
-RETURN NULL;
+    -- Проверка наличия успешной проверки в p2p перед добавлением в verter
+    IF NOT EXISTS (
+        SELECT 1
+        FROM p2p
+        WHERE "check" = check_id
+          AND state = 'Success'
+    ) THEN
+        RAISE EXCEPTION 'The check must be preceded by a successful P2P check';
+    END IF;
+
+    RETURN NULL;
 END;
 $$ LANGUAGE plpgsql;
 
