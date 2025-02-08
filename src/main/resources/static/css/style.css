@@ -138,7 +138,7 @@ button:hover {
 /* Контент табов */
 .tab-content {
     display: none;
-    padding: 20px;
+    padding: 0px;
 }
 
 .tab-content.active {
@@ -176,7 +176,7 @@ button:hover {
 
 /* Текстовое поле для SQL-запроса */
 textarea {
-    width: 100%;
+    width: 97%;
     height: 120px;
     font-family: monospace;
     font-size: 14px;
@@ -185,6 +185,7 @@ textarea {
     background-color: #1d2633;
     color: #d2d9e1;
     border: 1px solid #5EA4FF;
+    margin-bottom: 10px;
 }
 
 /* Кнопки формы */
