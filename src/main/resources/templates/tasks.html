@@ -10,6 +10,24 @@
     <div th:replace="~{menu :: submenu}"></div>
     <main>
         <h2>Tasks List</h2>
+
+        <div>
+            <a th:href="@{/tasks/add}" style="margin-bottom: 10px; display: inline-block;">
+                <button type="button">Add New Task</button>
+            </a>
+            <a th:href="@{/data/export?tableName=tasks&fileName=tasks.csv}" style="margin-bottom: 10px; display: inline-block;">
+                <button type="button">Export Tasks to CSV</button>
+            </a>
+
+            <!-- Добавление формы для загрузки файла -->
+            <form th:action="@{/data/import}" method="post" enctype="multipart/form-data" style="margin-top: 10px; display: inline-block;">
+                <input type="hidden" name="tableName" value="tasks">
+                <button type="submit">Import CSV</button>
+                <label for="file">Upload CSV File:</label>
+                <input type="file" id="file" name="file" required>
+            </form>
+        </div>
+
         <table border="1" th:if="${!#lists.isEmpty(tasks)}">
             <thead>
             <tr>

@@ -32,4 +32,10 @@ public class TasksService {
 
         return tasksDTOList;
     }
+
+    public List<Tasks> getAllProjects() { return tasksRepository.findAll(); }
+
+    public void createTask(TasksDTO task) {
+        tasksRepository.save(tasksMapper.toEntity(task));
+    }
 }

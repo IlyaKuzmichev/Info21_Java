@@ -5,8 +5,7 @@ import edu.school21.info21.services.TasksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +26,19 @@ public class TasksController {
         model.addAttribute("tasks", tasksList);
         model.addAttribute("activePage", "tasks");
         return "tasks";
+    }
+
+    @GetMapping("/add")
+    public String showAddForm(Model model) {
+        model.addAttribute("task", new TasksDTO());
+        model.addAttribute("projects", tasksService.getAllProjects());
+        model.addAttribute("activePage", "tasks");
+        return "task-form";
+    }
+
+    @PostMapping
+    public String saveTask(@ModelAttribute TasksDTO task) {
+        tasksService.createTask(task);
+        return "redirect:/tasks";
     }
 }
