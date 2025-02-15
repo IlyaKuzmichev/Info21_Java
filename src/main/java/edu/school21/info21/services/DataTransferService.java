@@ -58,40 +58,40 @@ public class DataTransferService {
         }
     }
 
-    @Transactional
-    public void importFromCsv(String tableName, String columns, MultipartFile file) {
+        @Transactional
+        public void importFromCsv(String tableName, String columns, MultipartFile file) {
 
-        String fileName = file.getOriginalFilename();
-        String filePath = sharedPath + fileName;
-        String fileAbsPath = "/shared/" + fileName;
-        if (fileName == null || !fileName.endsWith(".csv")) {
-            throw new IllegalArgumentException("Файл должен быть в формате CSV.");
-        }
+            String fileName = file.getOriginalFilename();
+            String filePath = sharedPath + "/" + fileName;
+            String fileAbsPath = "/shared/" + fileName;
+            if (fileName == null || !fileName.endsWith(".csv")) {
+                throw new IllegalArgumentException("Файл должен быть в формате CSV.");
+            }
 
-        File tempFile = new File(filePath);
-        try {
-            file.transferTo(tempFile);
-        } catch (IOException e) {
-            throw new RuntimeException("Ошибка сохранения файла: " + e.getMessage(), e);
-        }
+            File tempFile = new File(filePath);
+            try {
+                file.transferTo(tempFile);
+            } catch (IOException e) {
+                throw new RuntimeException("Ошибка сохранения файла: " + e.getMessage(), e);
+            }
 
-        try {
-            // Вызов хранимой процедуры
-            String tableNameWithSchema = "app." + tableName;
-            String sql = "CALL app.import_from_csv(:tbl, :filename, :columns)";
+            try {
+                // Вызов хранимой процедуры
+                String tableNameWithSchema = "app." + tableName;
+                String sql = "CALL app.import_from_csv(:tbl, :filename, :columns)";
 
-            Query query = entityManager.createNativeQuery(sql);
-            query.setParameter("tbl", tableNameWithSchema);
-            query.setParameter("filename", fileAbsPath);
-            query.setParameter("columns", columns != null ? columns : "");
-            query.executeUpdate();
-        } catch (Exception e) {
-            throw new RuntimeException("Ошибка при вызове процедуры импорта: " + e.getMessage(), e);
-        } finally {
-            // Удаляем временный файл
-            if (tempFile.exists()) {
-                tempFile.delete();
+                Query query = entityManager.createNativeQuery(sql);
+                query.setParameter("tbl", tableNameWithSchema);
+                query.setParameter("filename", fileAbsPath);
+                query.setParameter("columns", columns != null ? columns : "");
+                query.executeUpdate();
+            } catch (Exception e) {
+                throw new RuntimeException("Ошибка при вызове процедуры импорта: " + e.getMessage(), e);
+            } finally {
+                // Удаляем временный файл
+                if (tempFile.exists()) {
+                    tempFile.delete();
+                }
             }
         }
-    }
 }

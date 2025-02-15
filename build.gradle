@@ -61,6 +61,12 @@ liquibase {
     runList = ['mainActivity']
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'edu.school21.info21.Info21Application'
+    }
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }

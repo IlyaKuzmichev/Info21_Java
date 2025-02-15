@@ -30,9 +30,6 @@ public class DataTransferController {
             @RequestParam String fileName,
             @RequestParam(required = false) String columns
     ) {
-        System.out.println(columns);
-        System.out.println(tableName);
-        System.out.println(fileName);
         byte[] csvData = dataTransferService.exportToCsv(tableName, fileName, columns);
 
         HttpHeaders headers = new HttpHeaders();

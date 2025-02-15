@@ -20,6 +20,11 @@ body {
     border-radius: 8px;
 }
 
+.icon {
+    max-width: 25px;
+    max-height: 25px;
+}
+
 header {
     display: flex;
     justify-content: center;

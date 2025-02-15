@@ -74,4 +74,10 @@ public class TasksController {
         tasksService.saveOrUpdateTask(oldTitle, task);
         return "redirect:/tasks";
     }
+
+    @GetMapping("/remove/{title}")
+    public String deleteTask(@PathVariable String title) {
+        tasksService.deleteTask(title);
+        return "redirect:/tasks";
+    }
 }

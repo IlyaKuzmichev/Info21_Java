@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Peers List</title>
+    <title>Tasks List</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -18,22 +18,21 @@
             <a th:href="@{/data/export?tableName=tasks&fileName=tasks.csv}" style="margin-bottom: 10px; display: inline-block;">
                 <button type="button">Export Tasks to CSV</button>
             </a>
-
-            <!-- Добавление формы для загрузки файла -->
-            <form th:action="@{/data/import}" method="post" enctype="multipart/form-data" style="margin-top: 10px; display: inline-block;">
+            <form id="uploadForm" th:action="@{/data/import}" method="post" enctype="multipart/form-data" style="display: inline-block;">
                 <input type="hidden" name="tableName" value="tasks">
-                <button type="submit">Import CSV</button>
-                <label for="file">Upload CSV File:</label>
-                <input type="file" id="file" name="file" required>
+                <input type="file" id="fileInput" name="file" style="display: none;" required>
+                <button type="button" id="uploadButton">Import CSV</button>
             </form>
         </div>
 
-        <table border="1" th:if="${!#lists.isEmpty(tasks)}">
+        <table th:if="${!#lists.isEmpty(tasks)}">
             <thead>
             <tr>
                 <th>Task name</th>
                 <th>Parent task</th>
                 <th>Max XP</th>
+                <th>Edit</th>
+                <th>Remove</th>
             </tr>
             </thead>
             <tbody>
@@ -43,7 +42,12 @@
                 <td th:text="${task.maxXp}"></td>
                 <td>
                     <a th:href="@{/tasks/edit/{title}(title=${task.title})}">
-                        <button type="button">Edit</button>
+                        <img class="icon" src="/pics/pen.png">
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/tasks/remove/{title}(title=${task.title})}" data-confirm="Вы уверены?">
+                        <img class="icon" src="/pics/remove.png">
                     </a>
                 </td>
             </tr>
@@ -52,4 +56,6 @@
     </main>
 </div>
 </body>
+<script type="text/javascript" src="/js/confirm_form.js"></script>
+<script type="text/javascript" src="/js/import_button.js"></script>
 </html>

@@ -48,8 +48,10 @@ public class TasksService {
         if (!oldTitle.equals(task.getTitle())) {
             tasksRepository.deleteById(oldTitle); // Удаляем старый объект
         }
+        createTask(task);
+    }
 
-        Tasks newTask = tasksMapper.toEntity(task);
-        tasksRepository.save(newTask);
+    public void deleteTask(String title) {
+        tasksRepository.deleteById(title);
     }
 }
