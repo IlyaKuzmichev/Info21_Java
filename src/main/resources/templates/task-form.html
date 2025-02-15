@@ -12,7 +12,7 @@
         <h2 th:text="${task.title == null ? 'Add New Task' : 'Edit Task'}"></h2>
 
         <form th:action="@{/tasks}" method="post">
-            <input type="hidden" th:if="${task.title != null}" name="title" th:value="${task.title}" />
+            <input type="hidden" th:if="${task.title != null}" name="oldTitle" th:value="${task.title}" />
             <div>
                 <label for="taskTitle">Task Title:</label>
                 <input type="text" id="taskTitle" name="title" th:value="${task.title}" required />

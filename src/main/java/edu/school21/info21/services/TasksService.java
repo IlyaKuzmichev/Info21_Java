@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TasksService {
@@ -37,5 +38,18 @@ public class TasksService {
 
     public void createTask(TasksDTO task) {
         tasksRepository.save(tasksMapper.toEntity(task));
+    }
+
+    public Optional<Tasks> getTaskByTitle(String title) {
+        return tasksRepository.findById(title);
+    }
+
+    public void saveOrUpdateTask(String oldTitle, TasksDTO task) {
+        if (!oldTitle.equals(task.getTitle())) {
+            tasksRepository.deleteById(oldTitle); // Удаляем старый объект
+        }
+
+        Tasks newTask = tasksMapper.toEntity(task);
+        tasksRepository.save(newTask);
     }
 }

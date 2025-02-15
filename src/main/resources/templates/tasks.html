@@ -41,6 +41,11 @@
                 <td><a th:href="@{/tasks/{title}(title=${task.title})}" th:text="${task.title}"></a></td>
                 <td th:text="${task.parentTask}"></td>
                 <td th:text="${task.maxXp}"></td>
+                <td>
+                    <a th:href="@{/tasks/edit/{title}(title=${task.title})}">
+                        <button type="button">Edit</button>
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>
