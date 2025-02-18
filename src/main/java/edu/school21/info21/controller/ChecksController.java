@@ -1,7 +1,6 @@
 package edu.school21.info21.controller;
 
 import edu.school21.info21.dto.ChecksDTO;
-import edu.school21.info21.mappers.ChecksMapper;
 import edu.school21.info21.services.ChecksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
