@@ -1,5 +1,6 @@
 package edu.school21.info21.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,8 @@ import jakarta.persistence.Id;
 public class Tasks {
     @Id
     private String title;
+    @Column(name = "parent_task")
     private String parentTask;
+    @Column(name = "max_xp")
     private int maxXp;
 }

@@ -1,7 +1,9 @@
 package edu.school21.info21.controller;
 
 import edu.school21.info21.dto.ChecksDTO;
+import edu.school21.info21.dto.PeersDTO;
 import edu.school21.info21.services.ChecksService;
+import edu.school21.info21.services.PeersService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,11 +20,21 @@ import java.util.List;
 @Tag(name = "API", description = "API Gateway")
 public class ApiController {
 
-    private ChecksService checksService;
+    private final ChecksService checksService;
+    private final PeersService peersService;
 
     @Autowired
-    public void ChecksController(ChecksService checksService) {
+    public ApiController(ChecksService checksService, PeersService peersService) {
         this.checksService = checksService;
+        this.peersService = peersService;
+    }
+
+    @GetMapping("/peers")
+    @Operation(summary = "List of peers", responses = {
+            @ApiResponse(responseCode = "200", description = "Peers list")
+    })
+    public ResponseEntity<List<PeersDTO>> peers() {
+        return ResponseEntity.ok(peersService.getAllPeers());
     }
 
     @GetMapping("/checks")

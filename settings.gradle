@@ -1,1 +1,3 @@
 rootProject.name = 'Info21'
+
+include('integration-test')
