@@ -16,4 +16,8 @@ public class FriendsService {
     }
 
     public List<Friends> getAllFriends() { return friendsRepository.findAll(); }
+
+    public void deleteFriendship(Long id) {
+        friendsRepository.removePairByLogins(id);
+    }
 }

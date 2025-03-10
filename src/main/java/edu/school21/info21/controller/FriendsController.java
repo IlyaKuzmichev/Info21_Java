@@ -5,6 +5,7 @@ import edu.school21.info21.services.FriendsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -25,5 +26,11 @@ public class FriendsController {
         model.addAttribute("friends", friendsList);
         model.addAttribute("activePage", "friends");
         return "friends";
+    }
+
+    @GetMapping("/remove/{id}")
+    public String deleteTask(@PathVariable Long id) {
+        friendsService.deleteFriendship(id);
+        return "redirect:/friends";
     }
 }

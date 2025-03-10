@@ -31,6 +31,8 @@
                 <th>ID</th>
                 <th>Peer #1</th>
                 <th>Peer #2</th>
+                <th>Edit</th>
+                <th>Remove</th>
             </tr>
             </thead>
             <tbody>
@@ -38,6 +40,16 @@
                 <td th:text="${friend.id}"></td>
                 <td th:text="${friend.peer_1}"></td>
                 <td th:text="${friend.peer_2}"></td>
+                <td>
+                    <a th:href="@{/friends/edit/{id}(id=${friend.id})}">
+                        <img class="icon" src="/pics/pen.png">
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/friends/remove/{id}(id=${friend.id})}" data-confirm="Вы уверены?">
+                        <img class="icon" src="/pics/remove.png">
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>
