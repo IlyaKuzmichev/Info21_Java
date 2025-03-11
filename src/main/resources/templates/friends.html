@@ -13,10 +13,10 @@
 
         <div>
             <a th:href="@{/friends/add}" style="margin-bottom: 10px; display: inline-block;">
-                <button type="button">Add New Task</button>
+                <button type="button">Add New Friends</button>
             </a>
             <a th:href="@{/data/export?tableName=friends&fileName=friends.csv}" style="margin-bottom: 10px; display: inline-block;">
-                <button type="button">Export Tasks to CSV</button>
+                <button type="button">Export Friends to CSV</button>
             </a>
             <form id="uploadForm" th:action="@{/data/import}" method="post" enctype="multipart/form-data" style="display: inline-block;">
                 <input type="hidden" name="tableName" value="friends">

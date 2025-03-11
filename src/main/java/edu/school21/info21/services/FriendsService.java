@@ -20,4 +20,15 @@ public class FriendsService {
     public void deleteFriendship(Long id) {
         friendsRepository.removePairByLogins(id);
     }
+
+    public Friends getFriendsById(Long id) {
+        return friendsRepository.findById(id).orElse(null);
+    }
+
+    public void saveFriendship(String peer_1, String peer_2) {
+        Friends friends = new Friends();
+        friends.setPeer_1(peer_1);
+        friends.setPeer_2(peer_2);
+        friendsRepository.save(friends);
+    }
 }
