@@ -30,7 +30,7 @@ spring:
       ddl-auto: none # опираемся на работу хибернейта
     properties:
       hibernate.default_schema: app # Указываем схему по умолчанию
-    show-sql: true
+    show-sql: false
 
   # ликвибейс пока отключен
   liquibase:
