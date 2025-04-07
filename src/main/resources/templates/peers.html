@@ -10,6 +10,7 @@
     <div th:replace="~{menu :: submenu}"></div>
     <main>
         <h2>Peers List</h2>
+
         <div>
             <a th:href="@{/peers/add}" style="margin-bottom: 10px; display: inline-block;">
                 <button type="button">Add New Peer</button>
@@ -17,27 +18,20 @@
             <a th:href="@{/data/export?tableName=peers&fileName=peers.csv}" style="margin-bottom: 10px; display: inline-block;">
                 <button type="button">Export Peers to CSV</button>
             </a>
-
-            <!-- Добавление формы для загрузки файла -->
-            <form th:action="@{/data/import}" method="post" enctype="multipart/form-data" style="margin-top: 10px; display: inline-block;">
+            <form id="uploadForm" th:action="@{/data/import}" method="post" enctype="multipart/form-data" style="display: inline-block;">
                 <input type="hidden" name="tableName" value="peers">
-                <button type="submit">Import CSV</button>
-                <label for="file">Upload CSV File:</label>
-                <input type="file" id="file" name="file" required>
+                <input type="file" id="fileInput" name="file" style="display: none;" required>
+                <button type="button" id="uploadButton">Import CSV</button>
             </form>
         </div>
 
-        <div th:if="${#lists.isEmpty(peers)}">
-            <p>No peers available.</p>
-        </div>
-
-        <!-- Если список не пустой, отображаем таблицу -->
-        <table border="1" th:if="${!#lists.isEmpty(peers)}">
+        <table th:if="${!#lists.isEmpty(peers)}">
             <thead>
             <tr>
                 <th>Nickname</th>
                 <th>Birthday</th>
                 <th>Edit</th>
+                <th>Remove</th>
             </tr>
             </thead>
             <tbody>
@@ -46,7 +40,12 @@
                 <td th:text="${peer.birthday}"></td>
                 <td>
                     <a th:href="@{/peers/edit/{nickname}(nickname=${peer.nickname})}">
-                        <button type="button">Edit</button>
+                        <img class="icon" src="/pics/pen.png" alt="Edit">
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/peers/remove/{nickname}(nickname=${peer.nickname})}" data-confirm="Вы уверены?">
+                        <img class="icon" src="/pics/remove.png" alt="Remove">
                     </a>
                 </td>
             </tr>
@@ -55,4 +54,6 @@
     </main>
 </div>
 </body>
+<script type="text/javascript" src="/js/confirm_form.js"></script>
+<script type="text/javascript" src="/js/import_button.js"></script>
 </html>

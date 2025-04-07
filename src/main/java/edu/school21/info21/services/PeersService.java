@@ -27,16 +27,21 @@ public class PeersService {
     public List<PeersDTO> getAllPeers() {
         List<Peers> peersList = peersRepository.findAll();
         List<PeersDTO> peersDTOList = new ArrayList<>();
-
         for (Peers peer : peersList) {
             peersDTOList.add(peerMapper.toDTO(peer));
         }
-
         return peersDTOList;
     }
 
     public Peers createPeer(String nickname, LocalDate birthday) {
-        Peers peer = new Peers(nickname, birthday); // Сохраняем дату как строку
+        Peers peer = new Peers(nickname, birthday);
+        return peersRepository.save(peer);
+    }
+
+    public Peers updatePeer(String nickname, LocalDate newBirthday) {
+        Peers peer = peersRepository.findById(nickname)
+                .orElseThrow(() -> new IllegalArgumentException("Peer " + nickname + " not found"));
+        peer.setBirthday(newBirthday);
         return peersRepository.save(peer);
     }
 
@@ -44,19 +49,8 @@ public class PeersService {
         return peersRepository.findById(nickname);
     }
 
-    public Peers updatePeer(String nickname, LocalDate newBirthday) {
-        Optional<Peers> existingPeer = peersRepository.findById(nickname);
-        if (existingPeer.isPresent()) {
-            Peers peer = existingPeer.get();
-            peer.setBirthday(newBirthday); // Обновляем дату рождения
-            peersRepository.save(peer);
-            return peer;
-        } else {
-            throw new IllegalArgumentException("Peer with nickname " + nickname + " not found");
-        }
-    }
-
     public void deletePeer(String nickname) {
         peersRepository.deleteById(nickname);
     }
 }
+

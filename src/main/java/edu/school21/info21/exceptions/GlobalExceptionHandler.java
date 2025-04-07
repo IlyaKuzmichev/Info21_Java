@@ -1,16 +1,18 @@
 package edu.school21.info21.exceptions;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ModelAndView handleAllExceptions(Exception ex, Model model) {
-
+        log.error("Произошла ошибка: {}", ex.getMessage());
         // Можно передать дополнительную ссылку на страницу (например, на главную)
         String redirectUrl = "/"; // Это дефолтный URL на главную страницу
 

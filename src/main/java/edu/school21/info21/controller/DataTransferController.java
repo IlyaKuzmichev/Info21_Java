@@ -1,6 +1,7 @@
 package edu.school21.info21.controller;
 
 import edu.school21.info21.services.DataTransferService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+@Slf4j
 @Controller
 @RequestMapping("/data")
 public class DataTransferController {
@@ -30,6 +32,7 @@ public class DataTransferController {
             @RequestParam String fileName,
             @RequestParam(required = false) String columns
     ) {
+        log.info("Пользователь экспортирует данные в CSV для таблицы {}", tableName);
         byte[] csvData = dataTransferService.exportToCsv(tableName, fileName, columns);
 
         HttpHeaders headers = new HttpHeaders();
@@ -49,9 +52,11 @@ public class DataTransferController {
             Model model
     ) {
         try {
+            log.info("Пользователь импортирует данные в таблицу {}", tableName);
             dataTransferService.importFromCsv(tableName, columns, file);
             return "redirect:/" + tableName;
         } catch (Exception e) {
+            log.error("Ошибка импорта: {}", e.getMessage());
             model.addAttribute("error", "Ошибка импорта: " + e.getMessage());
             return "error";
         }

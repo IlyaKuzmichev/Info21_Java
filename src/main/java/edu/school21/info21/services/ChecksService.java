@@ -7,6 +7,7 @@ import edu.school21.info21.repositories.ChecksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,5 +32,32 @@ public class ChecksService {
         }
 
         return checksDTOList;
+    }
+
+    public ChecksDTO getCheckById(Long id) {
+        return checksRepository.findById(id)
+                .map(checksMapper::toDTO)
+                .orElseThrow(() -> new RuntimeException("Check not found"));
+    }
+
+    public void saveCheck(String peer, String task, String date) {
+        Checks check = new Checks();
+        check.setPeer(peer);
+        check.setTask(task);
+        check.setDate(LocalDate.parse(date));
+        checksRepository.save(check);
+    }
+
+    public void updateCheck(Long id, String peer, String task, String date) {
+        Checks check = checksRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Check not found"));
+        check.setPeer(peer);
+        check.setTask(task);
+        check.setDate(LocalDate.parse(date));
+        checksRepository.save(check);
+    }
+
+    public void deleteCheck(Long id) {
+        checksRepository.deleteById(id);
     }
 }
