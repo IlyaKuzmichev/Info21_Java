@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "c1a342f8-939f-4a29-9c6b-1396f7794d93",
+		"name": "Info21_Java",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7995016"
+	},
+	"item": [
+		{
+			"name": "getAllPeers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/peers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"peers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPeerByNickname",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/peers/Baboba",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"peers",
+						"Baboba"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatePeer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nickname",
+							"value": "Baboba",
+							"type": "text"
+						},
+						{
+							"key": "birthday",
+							"value": "2000-02-02",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/peers/Baboba",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"peers",
+						"Baboba"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addNewPeer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nickname",
+							"value": "Zeliboba",
+							"type": "text"
+						},
+						{
+							"key": "birthday",
+							"value": "1999-10-22",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/peers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"peers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletePeer",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nickname",
+							"value": "Zeliboba",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "birthday",
+							"value": "1999-10-22",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/peers/Zeliboba",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"peers",
+						"Zeliboba"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

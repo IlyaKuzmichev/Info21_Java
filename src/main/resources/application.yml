@@ -1,5 +1,15 @@
 server:
-  port: 8081
+  port: 8080
+
+shared:
+  path: ${SHARED_PATH:/mnt/d/PROJECTS/IdeaProjects/Info21_Java/shared}
+
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+    path: /api/v1/swagger-ui
+  api-docs:
+    path: /api/v1
 
 spring:
   application:
@@ -20,7 +30,7 @@ spring:
       ddl-auto: none # опираемся на работу хибернейта
     properties:
       hibernate.default_schema: app # Указываем схему по умолчанию
-    show-sql: true
+    show-sql: false
 
   # ликвибейс пока отключен
   liquibase:
@@ -28,6 +38,8 @@ spring:
     enabled: true
     default-schema: app
     liquibase-schema: liquibase
+  main:
+    banner-mode: off
 
 logging:
   level:

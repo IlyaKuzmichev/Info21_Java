@@ -1,0 +1,201 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    background-color: #1d2633;
+    color: #d2d9e1;
+}
+
+.container {
+    width: 100%;
+    min-width: 600px;
+    max-width: 50%;
+    margin: 0px auto;
+    background-color: #2C384A;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.icon {
+    max-width: 25px;
+    max-height: 25px;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1d2633;
+    /* padding: 10px 20px; */
+    /* border-bottom: 1px solid #aebbca; */
+}
+
+.logo {
+    /* width: 100px; */
+    height: 100px;
+    margin-right: 20px;
+    margin-top: -10px;
+}
+
+nav {
+    flex-grow: 1;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #f4f4f9;
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+    text-align: left;
+}
+
+a {
+    color: #D9AEFF;
+}
+
+a:visited {
+    color: #5EA4FF;
+}
+
+.query-buttons button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #44EB99;
+    color: black;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+button:hover {
+    background-color: #A24FEA;
+    color: white;
+}
+
+#result {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #1d2633;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Стили для табов */
+.submenu {
+    background-color: #171d26;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.submenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.submenu ul li {
+    margin: 0 15px;
+}
+
+.submenu ul li a {
+    text-decoration: none;
+    color: #f4f4f9;
+    font-weight: bold;
+    transition: color 0.3s, background 0.3s;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.submenu ul li a.active {
+    background-color: #2C384A;
+    color: #44EB99;
+}
+
+/* Контент табов */
+.tab-content {
+    display: none;
+    padding: 0px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Стили кнопок */
+.query-buttons button {
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #44EB99;
+    border: none;
+    border-radius: 8px;
+    color: black;
+    transition: background 0.3s, color 0.3s;
+}
+
+.query-buttons button:hover {
+    background-color: #A24FEA;
+    color: white;
+}
+
+.query-description {
+    background-color: #171d26;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #f4f4f9;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+/* Текстовое поле для SQL-запроса */
+textarea {
+    width: 97%;
+    height: 120px;
+    font-family: monospace;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #1d2633;
+    color: #d2d9e1;
+    border: 1px solid #5EA4FF;
+    margin-bottom: 10px;
+}
+
+/* Кнопки формы */
+.form-buttons button {
+    margin-top: 10px;
+    width: 100%;
+}
+

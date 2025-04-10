@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Checks List</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{menu :: menu}"></div>
+    <div th:replace="~{menu :: submenu}"></div>
+    <main>
+        <h2>Checks List</h2>
+
+        <div>
+            <a th:href="@{/checks/add}" style="margin-bottom: 10px; display: inline-block;">
+                <button type="button">Add New Check</button>
+            </a>
+            <a th:href="@{/data/export?tableName=checks&fileName=checks.csv}" style="margin-bottom: 10px; display: inline-block;">
+                <button type="button">Export Checks to CSV</button>
+            </a>
+            <form id="uploadForm" th:action="@{/data/import}" method="post" enctype="multipart/form-data" style="display: inline-block;">
+                <input type="hidden" name="tableName" value="checks">
+                <input type="file" id="fileInput" name="file" style="display: none;" required>
+                <button type="button" id="uploadButton">Import CSV</button>
+            </form>
+        </div>
+
+        <table th:if="${!#lists.isEmpty(checks)}">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Peer</th>
+                <th>Task</th>
+                <th>Date</th>
+                <th>Edit</th>
+                <th>Remove</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="check : ${checks}">
+                <td th:text="${check.id}"></td>
+                <td th:text="${check.peer}"></td>
+                <td th:text="${check.task}"></td>
+                <td th:text="${check.date}"></td>
+                <td>
+                    <a th:href="@{/checks/edit/{id}(id=${check.id})}">
+                        <img class="icon" src="/pics/pen.png">
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/checks/remove/{id}(id=${check.id})}" data-confirm="Вы уверены?">
+                        <img class="icon" src="/pics/remove.png">
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+</body>
+<script type="text/javascript" src="/js/confirm_form.js"></script>
+<script type="text/javascript" src="/js/import_button.js"></script>
+</html>

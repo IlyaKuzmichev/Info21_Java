@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Операции</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{menu :: menu}"></div>
+    <!-- Субменю как на странице пиров, но теперь работает как табы -->
+    <header class="submenu">
+        <nav>
+            <ul>
+                <li><a href="#" class="tab-link active" data-tab="peers">😺 Пиры</a></li>
+                <li><a href="#" class="tab-link" data-tab="tasks">📋 Таски</a></li>
+                <li><a href="#" class="tab-link" data-tab="checks">🔬 Проверки</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div th:each="category : ${queries}" th:id="${category.getKey()}" class="tab-content"
+             th:classappend="${category == 'checks'} ? 'active'">
+            <th:block th:each="query : ${queries[category.getKey()]}">
+                <button th:data-query="${query.query}" th:data-description="${query.description}"
+                        th:onclick="'insertQuery(this.dataset.query, this.dataset.description)'">
+                    <span th:text="${query.name}"></span>
+                </button>
+            </th:block>
+        </div>
+        <!-- Блок с описанием -->
+        <div id="query-description" class="query-description">Выберите операцию, чтобы увидеть описание.</div>
+
+        <form id="sql-form">
+            <label for="sql-query">Введите SQL-запрос:</label><br>
+            <textarea id="sql-query" name="sql" placeholder="SELECT * FROM table_name"></textarea><br>
+            <button type="submit">Выполнить</button>
+            <button type="button" onclick="clearQuery()">Очистить</button>
+        </form>
+        <div id="result"></div>
+    </main>
+</div>
+</body>
+<script type="text/javascript" src="/js/operations.js"></script>
+</html>

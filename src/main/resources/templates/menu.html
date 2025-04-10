@@ -1,0 +1,20 @@
+<header th:fragment="menu">
+    <a href="/"><img class="logo" src="/pics/school21logo.svg" alt="Логотип"></a>
+    <nav>
+        <ul>
+            <li><a th:href="@{/data}">Данные</a></li>
+            <li><a th:href="@{/operations}">Операции</a></li>
+            <li><a th:href="@{/about}">О нас</a></li>
+        </ul>
+    </nav>
+</header>
+<header th:fragment="submenu" class="submenu">
+    <nav>
+        <ul>
+            <li><a th:href="@{/peers}" th:classappend="${activePage == 'peers'} ? 'active' : ''">😺 Пиры</a></li>
+            <li><a th:href="@{/tasks}" th:classappend="${activePage == 'tasks'} ? 'active' : ''">📋 Таски</a></li>
+            <li><a th:href="@{/checks}" th:classappend="${activePage == 'checks'} ? 'active' : ''">🔬 Проверки</a></li>
+            <li><a th:href="@{/friends}" th:classappend="${activePage == 'friends'} ? 'active' : ''">👥 Друзья</a></li>
+        </ul>
+    </nav>
+</header>

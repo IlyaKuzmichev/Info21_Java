@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Peers List</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{menu :: menu}"></div>
+    <div th:replace="~{menu :: submenu}"></div>
+    <main>
+        <h2>Peers List</h2>
+
+        <div>
+            <a th:href="@{/peers/add}" style="margin-bottom: 10px; display: inline-block;">
+                <button type="button">Add New Peer</button>
+            </a>
+            <a th:href="@{/data/export?tableName=peers&fileName=peers.csv}" style="margin-bottom: 10px; display: inline-block;">
+                <button type="button">Export Peers to CSV</button>
+            </a>
+            <form id="uploadForm" th:action="@{/data/import}" method="post" enctype="multipart/form-data" style="display: inline-block;">
+                <input type="hidden" name="tableName" value="peers">
+                <input type="file" id="fileInput" name="file" style="display: none;" required>
+                <button type="button" id="uploadButton">Import CSV</button>
+            </form>
+        </div>
+
+        <table th:if="${!#lists.isEmpty(peers)}">
+            <thead>
+            <tr>
+                <th>Nickname</th>
+                <th>Birthday</th>
+                <th>Edit</th>
+                <th>Remove</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="peer : ${peers}">
+                <td><a th:href="@{/peers/{nickname}(nickname=${peer.nickname})}" th:text="${peer.nickname}"></a></td>
+                <td th:text="${peer.birthday}"></td>
+                <td>
+                    <a th:href="@{/peers/edit/{nickname}(nickname=${peer.nickname})}">
+                        <img class="icon" src="/pics/pen.png" alt="Edit">
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/peers/remove/{nickname}(nickname=${peer.nickname})}" data-confirm="Вы уверены?">
+                        <img class="icon" src="/pics/remove.png" alt="Remove">
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+</body>
+<script type="text/javascript" src="/js/confirm_form.js"></script>
+<script type="text/javascript" src="/js/import_button.js"></script>
+</html>

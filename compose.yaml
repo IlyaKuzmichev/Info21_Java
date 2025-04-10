@@ -10,8 +10,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./src/main/resources/schema.sql:/docker-entrypoint-initdb.d/init-script.sql
+      - ./shared:/shared
     ports:
-      - "5432:5432"
+      - "5432"
 
   liquibase:
     image: liquibase/liquibase
@@ -30,5 +31,34 @@ services:
       - ./src/main/resources/migrations:/liquibase/changelog
     command:
       - update
+  app:
+    image: 'openjdk:21-jdk'
+    restart: always
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      SHARED_PATH: ${SHARED_PATH}
+    volumes:
+      - ./shared:/shared  # Прокидываем каталог для импорта
+      - ./build/libs/Info21-0.0.1-SNAPSHOT.jar:/app.jar  # Копируем JAR в контейнер
+      - ./logs:/logs
+    command: [ "java", "-jar", "app.jar" ]  # Запуск приложения
+    ports:
+      - "8080"
+  nginx:
+    image: nginx:latest
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 volumes:
+  shared:
   postgres_data:
+  logs:

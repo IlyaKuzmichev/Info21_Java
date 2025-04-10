@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Friends List</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{menu :: menu}"></div>
+    <div th:replace="~{menu :: submenu}"></div>
+    <main>
+        <h2 th:text="${friends.id == 0 ? 'Add New Friends' : 'Edit Friends'}"></h2>
+
+        <form th:action="@{/friends}" method="post" data-confirm="Вы уверены?">
+            <div>
+                <label for="peer_1">Peer #1:</label>
+                <select id="peer_1" name="peer_1">
+                    <option th:each="peer : ${peers}"
+                            th:value="${peer.nickname}"
+                            th:text="${peer.nickname}"
+                            th:selected="${friends.peer_1 == peer.nickname}">
+                    </option>
+                </select>
+
+                <label for="peer_2">Peer #2:</label>
+                <select id="peer_2" name="peer_2">
+                    <option th:each="peer : ${peers}"
+                            th:value="${peer.nickname}"
+                            th:text="${peer.nickname}"
+                            th:selected="${friends.peer_2 == peer.nickname}">
+                    </option>
+                </select>
+            </div>
+            <button type="submit">Save</button>
+            <a th:href="@{/friends}">
+                <button type="button">Cancel</button>
+            </a>
+        </form>
+    </main>
+</div>
+</body>
+<script type="text/javascript" src="/js/confirm_form.js"></script>
+<script type="text/javascript" src="/js/import_button.js"></script>
+</html>

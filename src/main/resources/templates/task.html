@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Peers List</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{menu :: menu}"></div>
+    <div th:replace="~{menu :: submenu}"></div>
+    <main>
+        <h2>Details for: <span th:text="${task.title}"></span></h2>
+        <p>Parent Task: <span th:text="${task.parentTask}"></span></p>
+        <p>Max XP: <span th:text="${task.maxXp}"></span></p>
+        <a href="/tasks">Back to list</a>
+    </main>
+</div>
+</body>
+</html>

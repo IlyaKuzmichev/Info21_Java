@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Check Form</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{menu :: menu}"></div>
+    <div th:replace="~{menu :: submenu}"></div>
+    <main>
+        <h2 th:text="${check.id == 0 ? 'Add New Check' : 'Edit Check'}"></h2>
+
+        <form th:action="@{/checks}" method="post" data-confirm="Вы уверены?">
+            <input type="hidden" name="id" th:value="${check.id}" />
+
+            <div>
+                <label for="peer">Peer:</label>
+                <select id="peer" name="peer" required>
+                    <option th:each="peer : ${peers}"
+                            th:value="${peer.nickname}"
+                            th:text="${peer.nickname}"
+                            th:selected="${check.peer == peer.nickname}">
+                    </option>
+                </select>
+
+                <label for="task">Task:</label>
+                <select id="task" name="task" required>
+                    <option th:each="task : ${tasks}"
+                            th:value="${task.title}"
+                            th:text="${task.title}"
+                            th:selected="${check.task == task.title}">
+                    </option>
+                </select>
+
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" th:value="${check.date}" required />
+            </div>
+
+            <button type="submit">Save</button>
+            <a th:href="@{/checks}">
+                <button type="button">Cancel</button>
+            </a>
+        </form>
+
+    </main>
+</div>
+</body>
+<script type="text/javascript" src="/js/confirm_form.js"></script>
+</html>
